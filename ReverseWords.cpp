@@ -57,7 +57,7 @@ public:
 int main()
 {
     Solution s;
-    string str = "     Alex         love LeetCode and     GitHub   ";
+    string str = "     Alex         loves LeetCode and     GitHub   ";
 
     s.reverseWords(str);
 
