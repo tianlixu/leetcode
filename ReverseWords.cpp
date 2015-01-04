@@ -25,7 +25,7 @@ class Solution {
 public:
     void reverseWords(string &s) {
         char SPACE = ' ';
-        size_t posStart = -1;
+        size_t posStart = string::npos;
         size_t posEnd = s.length()-1;
         
         while ( (posStart = s.find_last_of(SPACE, posEnd)) != string::npos) {
@@ -57,8 +57,7 @@ public:
 int main()
 {
     Solution s;
-//    string str = "     Alex         love cpp and       java    ";
-    string str = " ";
+    string str = "     Alex         love LeetCode and     GitHub   ";
 
     s.reverseWords(str);
 
@@ -71,8 +70,6 @@ int main()
     s.reverseWord(word);
     cout << word << endl;
     */
-
-
     
     return 0;
 }
