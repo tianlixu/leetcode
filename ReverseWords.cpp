@@ -52,7 +52,6 @@ public:
             if (i != v.size()-1)
                 s += SPACE;
         }
- 
     }
     
     void reverseWord(string &word) {
@@ -68,9 +67,12 @@ int main()
     Solution s;
     string str = "     Alex         loves LeetCode and     GitHub   ";
 
-    s.reverseWords(str);
+    cout << str << endl;
 
-    cout <<endl;
+    s.reverseWords(str);
+    cout <<str << endl;
+
+    cout << endl;
 
     /*
     string word = "buHtiG";
