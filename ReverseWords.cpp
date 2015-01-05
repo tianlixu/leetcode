@@ -27,23 +27,32 @@ public:
         char SPACE = ' ';
         size_t posStart = string::npos;
         size_t posEnd = s.length()-1;
-        
+
+        std::vector<string> v;
         while ( (posStart = s.find_last_of(SPACE, posEnd)) != string::npos) {
             if (posStart != posEnd) {
-                cout << s.substr(posStart+1, posEnd-posStart);
-                cout << SPACE;
+                // find a word
+                v.push_back(s.substr(posStart+1, posEnd-posStart));
             } // else { ignore the additional SPACEs
 
             // ignore the first SPACE
-            if (posStart == 0) 
+            if (posStart == 0)
                 break;
 
             posEnd = posStart-1;
         }
 
-        // print the first word
+        // find the first word
         if (posStart != 0)
-            cout << s.substr(0, posEnd+1);
+            v.push_back(s.substr(0, posEnd+1));
+
+        s.clear();
+        for (int i=0; i<v.size(); ++i) {
+            s += v[i];
+            if (i != v.size()-1)
+                s += SPACE;
+        }
+ 
     }
     
     void reverseWord(string &word) {
