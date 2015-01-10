@@ -1,7 +1,7 @@
 /*
  Source : https://oj.leetcode.com/problems/add-two-numbers/
  Author : Alex Xu
- Date   : Jan 09, 2015
+ Date   : Jan 10, 2015
  Problem:
 
 You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -27,7 +27,7 @@ struct ListNode {
 
 
 /*
-  n1 -> n2 -> n3 -> n4 -> nil
+  n1 -> n2 -> n3    +n4
   ^           ^
   head        P
 */
