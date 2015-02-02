@@ -31,7 +31,7 @@ public:
                     return -1;
             }
             
-++ i;
+            ++ i;
             j = 0;
         }
 
