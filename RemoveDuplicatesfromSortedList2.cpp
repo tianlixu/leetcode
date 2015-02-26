@@ -9,7 +9,7 @@
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
-            if (head == NULL || head->next == NULL)
+        if (head == NULL || head->next == NULL)
             return head;
         
         ListNode *newHead = new ListNode(0);
@@ -34,6 +34,5 @@ public:
             p->next = c->next;
         
         return  newHead->next;   
-        return  newHead->next;
     }
 };
