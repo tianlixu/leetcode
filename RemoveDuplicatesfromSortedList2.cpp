@@ -9,7 +9,7 @@
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
-        if (head == NULL || head->next == NULL)
+            if (head == NULL || head->next == NULL)
             return head;
         
         ListNode *newHead = new ListNode(0);
@@ -17,25 +17,23 @@ public:
         
         ListNode *p = newHead;  // previous
         ListNode *c = p->next;  // current
-        ListNode *n = c->next;  // next
         
-        while (n != NULL) { 
-            if (c->val != n->val) { 
+        while (c->next != NULL) { 
+            if (c->val != c->next->val) { 
                 if (p->next == c) { // 1, 2, 3, 4, 5
                     p = c;
                 } else {
-                    p->next = n; // 1, 2, 3, 3, 3, 4
+                    p->next = c->next; // 1, 2, 3, 3, 3, 4
                 }
             }
             
-            c = n;
-            n = n->next;
+            c = c->next;
         }
         
         if (p->next != c)
-            p->next = n;
-
+            p->next = c->next;
         
+        return  newHead->next;   
         return  newHead->next;
     }
 };
