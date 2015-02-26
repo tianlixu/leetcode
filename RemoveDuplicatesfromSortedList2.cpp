@@ -1,3 +1,18 @@
+/*
+ Source : https://oj.leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+ Author : Alex Xu
+ Date   : Feb 26, 2015
+ Problem:
+Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+
+For example,
+Given 1->2->3->3->4->4->5, return 1->2->5.
+Given 1->1->1->2->3, return 2->3.
+*/
+
+#include <iostream>
+using namespace std;
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -6,6 +21,20 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+ struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+void printList(ListNode *head) {
+    while (head != NULL) {
+        cout << head->val << "->";
+        head = head->next;
+    }
+    cout <<"null" << endl;
+}
+
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
@@ -58,3 +87,22 @@ Solution 2:
     }
 */
 };
+
+int main()
+{
+    Solution s;
+
+    ListNode head(1);
+    ListNode n1(3);
+    ListNode n2(2);
+    ListNode n3(2);
+    head.next = &n1;
+    n1.next = &n2;
+    n2.next = &n3;
+
+    printList(&head);
+    ListNode *newHead = s.deleteDuplicates(&head);
+    printList(newHead);
+
+    return 0;
+}
