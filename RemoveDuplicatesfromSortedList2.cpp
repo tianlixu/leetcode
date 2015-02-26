@@ -9,6 +9,27 @@
 class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
+        // recursive solution
+        if (head == NULL || head->next == NULL)
+            return head;
+
+        ListNode *p = head->next;
+        while (p != NULL && head->val == p->val) {
+            p = p->next;
+        }
+        
+        if (head->next != p){ // 1(h), 1, 2(p)
+            head = deleteDuplicates(p); // reset head
+        } else { // 1(h), 2(p), 3
+            head->next = deleteDuplicates(p); // relink head->next
+        }
+
+        return head;
+    }
+
+/*
+Solution 2:
+    ListNode *deleteDuplicates(ListNode *head) {
         if (head == NULL || head->next == NULL)
             return head;
         
@@ -35,4 +56,5 @@ public:
         
         return  newHead->next;   
     }
+*/
 };
