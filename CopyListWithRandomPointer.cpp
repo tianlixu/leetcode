@@ -1,3 +1,13 @@
+/*
+ Source : https://leetcode.com/problems/copy-list-with-random-pointer/
+ Author : Alex Xu
+ Date   : March 10, 2015
+ Problem: 
+A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+Return a deep copy of the list.
+*/
+
 /**
  * Definition for singly-linked list with a random pointer.
  * struct RandomListNode {
@@ -6,7 +16,7 @@
  *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
  * };
  */
- #inlcude <map>
+ #inlcude <unordered_map>
  
 class Solution {
 public:
