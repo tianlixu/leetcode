@@ -15,7 +15,7 @@ public:
             return NULL;
         
         RandomListNode dummy = RandomListNode(0);
-        std::map<RandomListNode*, RandomListNode*> mapCopy; // map<origin, copy>
+        std::unordered_map<RandomListNode*, RandomListNode*> mapCopy; // map<origin, copy>
                 
         // create the single linked list first without setting random pointer
         RandomListNode *p = head;
