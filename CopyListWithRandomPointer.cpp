@@ -15,11 +15,9 @@ public:
             return NULL;
         
         RandomListNode dummy = RandomListNode(0);
-        std::map<RandomListNode*, int> mapOrigin;
-        std::map<int, RandomListNode*> mapCopy; 
-        
+        std::map<RandomListNode*, RandomListNode*> mapCopy; // map<origin, copy>
+                
         // create the single linked list first without setting random pointer
-        int index = 1; // index of the node in the list
         RandomListNode *p = head;
         RandomListNode *q = &dummy;
         while (p != NULL) {
@@ -27,24 +25,18 @@ public:
             q->next = node;
             
             // setting the map
-            mapOrigin[p] = index;
-            mapCopy[index] = node;
+            mapCopy[p] = node;
             
             p = p->next;
             q = node;
-            ++ index;
         }
         q->next = NULL;
         
         p = head;
         q = dummy.next;
         while (p != NULL) {
-            if (p->random == NULL) {
-                q->random = NULL;
-            } else {
-                int idx = mapOrigin[p->random];
-                q->random = mapCopy[idx];
-            }
+            q->random = mapCopy[p->random];
+
             p = p->next;
             q = q->next;
         }
