@@ -39,4 +39,35 @@ public:
         
         return length;
     }
+
+    int lengthOfLongestSubstring2(string s) {
+        // array to save the position for a given character, just like what a hash table does.
+        int m[128];
+        memset(m,-1,128*sizeof(int));
+        
+        // length of the longest substring
+        int length = 0;
+        // the index of the first charcater for current substring
+        int start = 0;
+        int i=0;        
+        
+        while (i < s.length()) {
+            if (m[s[i]] >= start) {
+                /*
+                  a b c d e c f g
+                  ^   ^     ^
+                  |   |m[c] |i
+                  |start
+                 */
+                start = m[s[i]] + 1;
+            } else {
+                length = max(length, i-start+1);
+            }
+            
+            m[s[i]] = i;
+            i++;
+        }
+        
+        return length;
+    }
 };
