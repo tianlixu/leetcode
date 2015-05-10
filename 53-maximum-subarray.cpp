@@ -13,6 +13,52 @@ using namespace fos;
 class Solution {
 public:
     /*
+     * Scaning Algorithm:
+     *     A negative value does not help for SUM. 
+     */
+
+    int maxSubArray4(vector<int>& nums) {
+        int currentSum = 0;
+        int maxSum = INT_MIN;
+
+        for (int i=0; i<nums.size(); i++) {
+            if (currentSum < 0)
+                currentSum = nums[i];
+            else 
+                currentSum += nums[i];
+
+            maxSum = std::max(currentSum, maxSum);
+        }
+
+        return maxSum;
+    }
+
+public:
+    /*
+     * Dynamic programming
+     *
+     * The state formular is:
+     *     f[i] - the MSS(Maximum Subarray Sum) of subarray a[0], a[1] ... a[i]
+     * then
+     *     f[i+1] = max(f[i] + a[i+1], a[i+1])
+     * So
+     *     max(f[0], f[1] ... f[n]) is the answer.
+     *
+     * Time: O(n), Space: O(1)
+     */
+    int maxSubArray3(vector<int>& nums) {
+        int maxSum = INT_MIN;
+        int f = 0;
+        for (int i=0; i<nums.size(); i++) {
+            f = std::max(f + nums[i], nums[i]);
+            maxSum = std::max(f, maxSum);
+        }
+
+        return maxSum;
+    }
+
+public:
+    /*
      * Devide and Conquer
      * Time: O(nlogn)
      */
@@ -36,6 +82,9 @@ public:
     }
 
 private:
+    /*
+     * Time: O(n)
+     */
     int maxSubArrrayCross(vector<int>& nums, int low, int mid, int high) {
         int maxSumCrossLeft = INT_MIN;
         int maxSumCrossRight = INT_MIN;
@@ -108,7 +157,7 @@ int main()
         v.push_back(a[i]);
 
     Solution s;
-    cout << s.maxSubArray2(v) << endl;
+    cout << s.maxSubArray3(v) << endl;
 
     return 0;
 }
