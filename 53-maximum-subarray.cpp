@@ -16,7 +16,7 @@ public:
      * Kadane Algorithm: the same as Algorithm
      * 
      */
-    int maxSubArray4(vector<int>& nums) {
+    int maxSubArray5(vector<int>& nums) {
         int currentSum = 0;
         int maxSum = INT_MIN;
 
