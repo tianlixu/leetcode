@@ -13,6 +13,27 @@ using namespace fos;
 class Solution {
 public:
     /*
+     * Kadane Algorithm: the same as Algorithm
+     * 
+     */
+    int maxSubArray4(vector<int>& nums) {
+        int currentSum = 0;
+        int maxSum = INT_MIN;
+
+        for (int i=0; i<nums.size(); i++) {
+            if (currentSum < 0)
+                currentSum = 0;
+
+            currentSum += nums[i];
+            maxSum = std::max(currentSum, maxSum);
+        }
+
+        return maxSum;
+    }
+
+public:
+
+    /*
      * Scaning Algorithm:
      *     A negative value does not help for SUM. 
      */
