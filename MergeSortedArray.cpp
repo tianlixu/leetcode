@@ -27,35 +27,40 @@
 using namespace std;
 
 class Solution {
-private:
-    void insertAt(int A[], int last, int at, int value) {
-        // shifting
-        for (int i=last; i>=at; --i) {
-            A[i+1] = A[i];
-        }
-
-        A[at] = value;
-    }
-
 public:
     void merge(int A[], int m, int B[], int n) {
+        // the position in A[m], where B[i] > A[pos]
+        // B[i] will be inerted into A[pos, m]
         int pos = 0;
+        
         for (int i=0; i<n; i++) {
             int j = pos;
             while (j<m+i) {
                 if (B[i] < A[j]) {
-                    insertAt(A, m+i-1, j, B[i]);
+                    insertAt(A, m+i, j, B[i]);
                     break;
                 }
                 ++j;
             }
 
-            if (j == m+i) // to the end of A[]
+            if (j == m+i) // the end of A[]
                 A[j] = B[i];
 
             pos = j+1;
         }
     }
+
+private:
+    /*
+     * intsert a value into an array A[m] at a given position.
+     */
+    void insertAt(int A[], int m, int at, int value) {
+        // shifting to the right
+        for (int i=m; i>at; --i)
+            A[i] = A[i-1];
+
+        A[at] = value;
+    }    
 };
 
 void printArray(int a[], int len)
