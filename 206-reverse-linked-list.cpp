@@ -36,7 +36,22 @@ public:
         return pre;
     }
 
-    /// solution with a stack, costing more space
+    /// Recursive solution
+    ListNode* reverseList(ListNode* head) {
+        // Exit condition
+        if (head == nullptr || head->next == nullptr)
+            return head;
+        
+        ListNode* next = head->next;
+        ListNode* newHead = reverseList(next);
+        // Statement
+        next->next = head;
+        head->next = nullptr;
+        
+        return newHead;
+    }
+    
+    /// solution with a stack, costing more space, Time: O(n), Space: O(n)
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr)
             return nullptr;
