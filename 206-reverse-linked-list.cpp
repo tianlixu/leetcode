@@ -19,9 +19,10 @@
  */
 class Solution {
 public:
+    /// iterative solution
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr)
-            return nullptr;
+            return;
             
         ListNode* pre = nullptr;
         ListNode* next = nullptr;
@@ -33,5 +34,33 @@ public:
         } while (head != nullptr);
         
         return pre;
+    }
+
+    /// solution with a stack, costing more space
+    ListNode* reverseList(ListNode* head) {
+        if (head == nullptr)
+            return nullptr;
+
+        // push nodes to a stack
+        std::stack<ListNode*> stk;
+        while (head != nullptr) {
+            stk.push(head);
+            head = head->next;
+        }
+
+        /// puop nodes to recreate the linked list
+        head = stk.top();
+        stk.pop();
+        
+        ListNode* p = head;
+        while (!stk.empty()) {
+            ListNode* node = stk.top();
+            p->next = node;
+            p = node;
+            stk.pop();
+        }
+        p->next = nullptr;
+        
+        return head;
     }
 };
