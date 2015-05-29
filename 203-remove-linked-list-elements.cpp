@@ -20,6 +20,22 @@
  */
 class Solution {
 public:
+    /// recursive solution
+    ListNode* removeElements(ListNode* head, int val) {
+        if (head == nullptr)
+            return nullptr;
+        
+        if (head->val == val) {
+            // ignore head, and remove from the rest(head->next)
+            return removeElements(head->next, val);
+        } else {
+            // keep the head, and remove from the rest(head->next, and reconstruct head->next)
+            head->next = removeElements(head->next, val);
+            return head;
+        }
+    }
+    
+    /// iterative solution
     ListNode* removeElements(ListNode* head, int val) {
         if (head == nullptr)
             return nullptr;
