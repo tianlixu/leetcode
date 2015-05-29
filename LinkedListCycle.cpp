@@ -8,6 +8,7 @@
  */
 class Solution {
 public:
+    // Time: O(n)
     bool hasCycle(ListNode *head) {
         if (head == NULL || head->next == NULL)
             return false;
@@ -30,5 +31,26 @@ public:
         }
         
         return true;
+    }
+
+    // Time: O(n^2)
+    bool hasCycle(ListNode *head) {
+        if (head == NULL || head->next == NULL)
+            return false;
+        
+        ListNode* p1 = head->next;
+        while (p1 != nullptr) {
+            ListNode* p2 = head;
+            while (p2 != nullptr) {
+                if (p2 == p1->next)
+                    return true;                
+                if (p2 == p1)
+                    break;
+                p2 = p2->next;
+            }
+            p1 = p1->next;
+        }
+        
+        return false;
     }
 };
