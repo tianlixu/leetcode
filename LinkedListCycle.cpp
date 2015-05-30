@@ -19,14 +19,10 @@ public:
         ListNode *two = head;
         
         while (two != nullptr) {
-            two = two->next;
-            if (two == nullptr)
+            if (two->next == nullptr)
                 return false;
             
-            two = two->next;
-            if (two == nullptr)
-                return false;
-            
+            two = two->next->next;
             one = one->next;
             
             if (two == one)
