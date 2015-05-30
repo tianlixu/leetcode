@@ -8,6 +8,34 @@
  */
 class Solution {
 public:
+    // Time： O(n)
+    bool hasCycle(ListNode *head) {
+        if (head == NULL || head->next == NULL)
+            return false;
+        
+        // pointer to step forward one step
+        ListNode *one = head;
+        // pointer to step forward two steps
+        ListNode *two = head;
+        
+        while (two != nullptr) {
+            two = two->next;
+            if (two == nullptr)
+                return false;
+            
+            two = two->next;
+            if (two == nullptr)
+                return false;
+            
+            one = one->next;
+            
+            if (two == one)
+                return true;
+        }
+        
+        return false;
+    }
+    
     // Time: O(n)
     bool hasCycle(ListNode *head) {
         if (head == NULL || head->next == NULL)
