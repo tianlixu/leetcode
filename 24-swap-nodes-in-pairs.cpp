@@ -21,9 +21,37 @@
  */
 class Solution {
 public:
-    /* solution with two linked list: the odd list and the even list
-     */
     ListNode* swapPairs(ListNode* head) {
+        ListNode dummyNode(-1);
+        ListNode* p = &dummyNode;
+
+        // step two nodes each time
+        while (head != nullptr && head->next != nullptr) {
+            ListNode* nextEven = head->next;
+            ListNode* nextOdd = head;
+            head = head->next->next;            
+            
+            // even 1st, odd 2nd
+            p->next = nextEven;
+            p = p->next;
+            p->next =nextOdd;
+            p = p->next;
+        }
+
+        // if there are odd numbers of nodes in a list, the last node is not null
+        if (head != nullptr) {
+            p->next = head;
+            p = p->next;
+        }
+        p->next = nullptr;        
+        
+        return dummyNode.next;
+    }
+    
+    /*
+     * solution with two linked list: the odd list and the even list
+     */
+    ListNode* swapPairs2(ListNode* head) {
         if (head == nullptr || head->next == nullptr)
             return head;
 
