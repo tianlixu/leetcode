@@ -43,7 +43,7 @@ public:
     /*
      * Devide and conquer, iterative
      */
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* mergeKLists2(vector<ListNode*>& lists) {
         int n = lists.size();
     
         if(n == 0)
@@ -55,6 +55,47 @@ public:
             for(int i=0; i < n/2; i++)
                 lists[i] = mergeTwoLists(lists[i], lists[i + k]);
             n = mid;
+        }
+        return lists[0];
+    }
+
+    /*
+     * The same as mergeTwoLists2, but using two pointers
+     * easier for ME to understand the break condition
+     *
+     * 1 2 3 4....n
+     * 1 + n -> 1n     @[0]
+     * 2 + n-1 -> 2(n-1)    @[1]
+     * ...
+     */
+    ListNode* mergeKLists3(vector<ListNode*>& lists) {
+        if (lists.empty())
+            return nullptr;
+        
+        int n = lists.size() - 1; // index of the last element
+        while(n >0)
+        {
+            int i = 0;
+            while (true) {
+                lists[i] = mergeTwoLists(lists[i], lists[n]);
+                n--;
+                /*
+                 * i == n for even numbers in an array
+                 * 1    2    3    4
+                 *  --> |i  
+                 *      |n <--
+                 *
+                 * i+1 == n for odd numbers in an array
+                 * 1    2    3    4    5
+                 *  --> |i   
+                 *           |n <--
+                 */
+                if ((i == n) || (i+1 == n)) {
+                    break;
+                }
+                
+                i++;
+            }
         }
         return lists[0];
     }    
