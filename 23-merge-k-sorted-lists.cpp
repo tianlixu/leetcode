@@ -14,10 +14,56 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+struct cmp {
+    bool operator () (const ListNode *n1, const ListNode *n2) {
+        return n1->val > n2->val;
+    }
+};
+
 class Solution {
 public:
+    /*
+     * Solution with heap(priority queue)
+     * 
+     * Time to push an node into queue: lgk
+     * kn nodes will be pushed into queue
+     * then:
+     * Time = O(nk*lgk)
+     */
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.empty())
+            return nullptr;
+        
+        ListNode dummyNode(-1);
+        ListNode* res = &dummyNode;
+        priority_queue<ListNode*, vector<ListNode*>, cmp> q;
+        
+        // push the first node of each list into the queue
+        for(int i = 0; i < lists.size(); i++)
+            if(lists[i])
+                q.push(lists[i]);
+        
+        // pop the top(the greatest value)        
+        while(!q.empty())
+        {
+            ListNode* node = q.top();
+            q.pop();
+            res->next = node;
+            res = res->next;
+             
+            if(node->next)
+                q.push(node->next);
+        }
+        
+        return dummyNode.next;
+    }
+
+    
     /* 
      * Devide and conquer, recursive
+     *
+     * Time: nklgk
      */
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty())
@@ -67,6 +113,8 @@ public:
      * 1 + n -> 1n     @[0]
      * 2 + n-1 -> 2(n-1)    @[1]
      * ...
+     *
+     * Time = O(nklgk)
      */
     ListNode* mergeKLists3(vector<ListNode*>& lists) {
         if (lists.empty())
