@@ -29,6 +29,21 @@
  */
 class Solution {
 public:
+    /*
+     *      tail = null, nextFirst = null
+     *                   
+     *      o----------o-o---------o----->null
+     *      |first     |last
+     *
+     *
+     * ====> After reverse for the 1st group
+     *
+     *
+     *                   |nextFrist
+     *      o----------o-o---------o----->null
+     *      |last      |first
+     *                 |tail
+     */
     ListNode* reverseKGroup(ListNode* head, int k) {
         if (head == nullptr || head->next == nullptr || k == 0 || k == 1) 
             return head;
@@ -48,12 +63,13 @@ public:
                 if (tail != nullptr)
                     tail->next = last;
                 tail = first;
-                
+
+                // the 1st group, need to set the new head.
                 if (count == k)
                     head =newHead;
                     
-                last = nextFirst;
-                first = last;
+                first = nextFirst;
+                last = first;
             } else {
                 last = last->next;
             }
@@ -70,7 +86,8 @@ public:
             
             head = next;
         }
-        
+
+        // tail becomes head
         return tail;
     }
 };
