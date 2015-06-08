@@ -18,8 +18,8 @@ public:
         int length = 0;
         // the index of the first charcater for current substring
         int start = 0;
+
         int i=0;        
-        
         while (i < s.length()) {
             if (m.find(s[i]) != m.end() && m[s[i]] >= start) {
                 /*
