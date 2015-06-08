@@ -17,7 +17,7 @@ using namespace fos;
 class Solution {
 public:
     /*
-     * Kadane Algorithm: the same as Algorithm
+     * Kadane Algorithm: the same as Algorithm 4
      * 
      */
     int maxSubArray5(vector<int>& nums) {
