@@ -9,6 +9,12 @@
   abcdcba
 */
 
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
 class Solution {
 public:
     /*
@@ -61,5 +67,58 @@ private:
         
         // (low, high), not [low, high]
         return s.substr(low + 1 , high - low - 1);
+    }
+
+
+
+/*
+ * Brutal force, for each possible substring
+ * Time: O(n^3)
+ * will cause TLE in leetcode
+ */
+public:
+    string longestPalindrome2(string s) {
+        if (s.length() <= 1)
+            return s;
+            
+        string longestStr;
+        for (int i=0; i<s.length(); i++) {
+            for (int j=i; j<s.length(); j++) {
+                string sub = s.substr(i, j-i+1);
+                if (isPalindrome(sub) && (sub.length() > longestStr.length())
+                    )
+                        longestStr = sub;
+            }
+        }
+        
+        return longestStr;
+    }
+    
+private:
+    bool isPalindrome(string s) {
+        int low = 0;
+        int high = s.length() - 1;
+        
+        while (s[low] == s[high]) {
+            if (low == high || low+1 == high)
+                return true;
+                
+            low ++;
+            high --;
+        }
+        
+        return false;
     }    
 };
+
+int main()
+{
+    string str = "lcnvoknqgejxbfhijmxglisfzjwbtvhodwummdqeggzfczmetrdnoetmcydwddmtubcqmdjwnpzdqcdhplxtezctvgnpobnnscrmeqkwgiedhzsvskrxwfyklynkplbgefjbyhlgmkkfpwngdkvwmbdskvagkcfsidrdgwgmnqjtdbtltzwxaokrvbxqqqhljszmefsyewwggylpugmdmemvcnlugipqdjnriythsanfdxpvbatsnatmlusspqizgknabhnqayeuzflkuysqyhfxojhfponsndytvjpbzlbfzjhmwoxcbwvhnvnzwmkhjxvuszgtqhctbqsxnasnhrusodeqmzrlcsrafghbqjpyklaaqximcjmpsxpzbyxqvpexytrhwhmrkuybtvqhwxdqhsnbecpfiudaqpzsvfaywvkhargputojdxonvlprzwvrjlmvqmrlftzbytqdusgeupuofhgonqoyffhmartpcbgybshllnjaapaixdbbljvjomdrrgfeqhwffcknmcqbhvulwiwmsxntropqzefwboozphjectnudtvzzlcmeruszqxvjgikcpfclnrayokxsqxpicfkvaerljmxchwcmxhtbwitsexfqowsflgzzeynuzhtzdaixhjtnielbablmckqzcccalpuyahwowqpcskjencokprybrpmpdnswslpunohafvminfolekdleusuaeiatdqsoatputmymqvxjqpikumgmxaxidlrlfmrhpkzmnxjtvdnopcgsiedvtfkltvplfcfflmwyqffktsmpezbxlnjegdlrcubwqvhxdammpkwkycrqtegepyxtohspeasrdtinjhbesilsvffnzznltsspjwuogdyzvanalohmzrywdwqqcukjceothydlgtocukc";
+
+    Solution s;
+
+    cout << s.longestPalindrome1(str) << endl;
+    cout << s.longestPalindrome2(str) << endl;
+    
+    return 0;
+}
