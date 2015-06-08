@@ -87,7 +87,7 @@ public:
                 string sub = s.substr(i, j-i+1);
                 if (isPalindrome(sub) && (sub.length() > longestStr.length())
                     )
-                        longestStr = sub;
+                    longestStr = sub;
             }
         }
         
@@ -108,7 +108,57 @@ private:
         }
         
         return false;
-    }    
+    }
+
+
+public:
+    /*
+     * Dynamic Programming
+     *
+     * f(i,j) indicates whether a[i....j] is palindrome or not
+     *          |- true                        , i=j
+     * f(i,j) = |- a[i]=a[j]                   , j = i+1
+     *          |- a[i]=a[j] && f(i+1, j-1)    , j>i+1
+     * 
+     * Time: O(n^2)
+     */
+    string longestPalindrome3(string s) {
+        int low = 0;
+        int high = 0;
+        
+        const int N = s.length();
+        bool f[N][N];
+
+        for (int i=0; i<N; i++) {
+            f[i][i] = true;
+
+            /*
+             * !!! NOT: for (int j=i; j<N; j++)
+             * eg:
+             * f(0,3) = (a[0]==a[3] && f(1, 2))
+             * Note that f(1,2) has not been set yet.
+             */
+            for (int j=0; j<i; j++) {
+                /*
+                if (i == j) {
+                    f[j][i] = true;
+                } else if (i == j+1) {
+                    f[j][i] = (s[i] == s[j]);
+                } else {
+                    f[j][i] = f[j+1][i-1] && (s[i] == s[j]);
+                }
+                * --> Refactor to:*/
+                f[j][i] = (s[i] == s[j]) && (f[j+1][i-1] || i == j+1);                
+
+                if (f[j][i] && (i - j > high - low)) {
+                    low = j;
+                    high = i;
+                }
+            }
+        }
+
+        return s.substr(low, high - low + 1);
+    }
 };
 
 int main()
@@ -119,6 +169,7 @@ int main()
 
     cout << s.longestPalindrome1(str) << endl;
     cout << s.longestPalindrome2(str) << endl;
-    
+    cout << s.longestPalindrome3(str) << endl;
+
     return 0;
 }
