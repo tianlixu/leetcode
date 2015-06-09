@@ -18,8 +18,17 @@ using namespace std;
 class Solution {
 public:
     /*
-     * Brutal force: a[i] (or a[i] a[i+1]) is in the middle of the palindromic string
-     * Time: O(n^2)
+     * Manacher’s Algorithm
+     *
+     * http://articles.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
+     *
+     * Time: O(n) solution
+     */
+
+    
+    /*
+     * Enum: a[i] (or a[i] a[i+1]) is in the middle of the palindromic string
+     * Time: O(n^2), Space: O(1)
      */
     string longestPalindrome1(string s) {
         if (s.length() <= 1)
@@ -120,7 +129,7 @@ public:
      * f(i,j) = |- a[i]=a[j]                   , j = i+1
      *          |- a[i]=a[j] && f(i+1, j-1)    , j>i+1
      * 
-     * Time: O(n^2)
+     * Time: O(n^2), Space: O(n^2)
      */
     string longestPalindrome3(string s) {
         int low = 0;
