@@ -23,7 +23,12 @@ public:
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr)
             return;
-            
+        
+        /*
+                         |next
+            null   1->2->3->...->n->null
+             |pre  |head
+        */
         ListNode* pre = nullptr;
         ListNode* next = nullptr;
         do {
@@ -42,6 +47,16 @@ public:
         if (head == nullptr || head->next == nullptr)
             return head;
         
+        /*
+            |next
+         1->2->3->....->n->null
+         |head
+         
+         ->
+               |next
+         null  1 2<-3<-.....<-n
+               |head
+        */
         ListNode* next = head->next;
         ListNode* newHead = reverseList(next);
         // Statement
@@ -63,7 +78,7 @@ public:
             head = head->next;
         }
 
-        /// puop nodes to recreate the linked list
+        /// pop nodes to recreate the linked list
         head = stk.top();
         stk.pop();
         
