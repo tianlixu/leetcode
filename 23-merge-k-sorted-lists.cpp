@@ -108,6 +108,7 @@ public:
     /*
      * The same as mergeTwoLists2, but using two pointers
      * easier for ME to understand the break condition
+     * one pointer i, move forward; one pointer n, move backward. break whenever they meet.
      *
      * 1 2 3 4....n
      * 1 + n -> 1n     @[0]
