@@ -27,9 +27,7 @@ public:
         int leftDepth = minDepth(root->left);
         int rightDepth = minDepth(root->right);
         
-        if (leftDepth == 0 && rightDepth == 0)
-            return 1;
-        else if (leftDepth == 0)
+        if (leftDepth == 0)
             return rightDepth + 1;
         else if (rightDepth == 0)
             return leftDepth + 1;
