@@ -26,12 +26,6 @@ public:
         int leftDepth = maxDepth(root->left);
         int rightDepth = maxDepth(root->right);
         
-        if (leftDepth == 0 && rightDepth == 0)
-            return 1;
-        else if (leftDepth == 0)
-            return rightDepth + 1;
-        else if (rightDepth == 0)
-            return leftDepth + 1;
-        else return max(leftDepth, rightDepth) + 1;
+        return max(leftDepth, rightDepth) + 1;
     }
 };
