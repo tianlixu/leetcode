@@ -49,43 +49,43 @@ void printTree(TreeNode *root) {
 
 class Solution {
 public:
+
     vector<vector<int> > levelOrder(TreeNode *root) {
-        vector<vector<int> > nodesV;
+        vector<vector<int>> vec;
         
         if (root == nullptr)
-            return nodesV;
-        
-        std::queue<TreeNode *> parentQ;
-        std::queue<TreeNode *> childQ;
-        
-        std::queue<TreeNode *> *pQ = &parentQ;
-        std::queue<TreeNode *> *cQ = &childQ;
-        pQ->push(root);
-
+            return vec;
             
-    visit: // visit current level
+        std::queue<TreeNode *> thisQ;
+        std::queue<TreeNode *> nextQ;
+        
+        thisQ.push(root);
+        levelOrder(thisQ, nextQ, vec);
+        
+        return vec;
+    }
+    
+    void levelOrder(std::queue<TreeNode *>& thisQ, std::queue<TreeNode *>& nextQ, vector<vector<int> >& vec) {
+        // values of this levle
         vector<int> v;
-        while(!pQ->empty()) {
-            TreeNode *node = pQ->front();
+
+        while(!thisQ.empty()) {
+            TreeNode* node = thisQ.front();
             
             v.push_back(node->val);
             
             if (node->left != nullptr)
-                cQ->push(node->left);
+                nextQ.push(node->left);
             if (node->right != nullptr)
-                cQ->push(node->right);
-            
-            pQ->pop();
+                nextQ.push(node->right);
+                
+            thisQ.pop();
         }
-        nodesV.push_back(v);
+        vec.push_back(v);   
 
-        // if child level is not empty then visit child nodes
-        if (!cQ->empty()) {
-            std::swap(pQ, cQ);
-            goto visit;
-        }
-        
-        return nodesV;
+        // get the values of next level if it is not empty
+        if (!nextQ.empty())
+            levelOrder(nextQ, thisQ, vec);
     }
 };
 
