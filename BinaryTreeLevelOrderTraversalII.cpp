@@ -1,24 +1,26 @@
 /*
- Source : https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
- Author : Alex Xu
- Date   : Mar 16, 2015
+  Source : https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
+  Author : Alex Xu
+  Date   : Mar 16, 2015
  
- Problem:
-Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+  Problem:
+  Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
 
-For example:
-Given binary tree {3,9,20,#,#,15,7},
-    3
-   / \
-  9  20
-    /  \
-   15   7
-return its bottom-up level order traversal as:
-[
-  [15,7],
-  [9,20],
-  [3]
-]
+  For example:
+  Given binary tree {3,9,20,#,#,15,7},
+     3
+    / \
+   9  20
+     /  \
+    15   7
+  return its bottom-up level order traversal as:
+  [
+      [15,7],
+      [9,20],
+      [3]
+  ]
+
+  the same solution as @BinaryTreeLevelOrderTraversal.cpp
 */
 
 
@@ -50,46 +52,43 @@ void printTree(TreeNode *root) {
 class Solution {
 public:
     vector<vector<int> > levelOrder(TreeNode *root) {
-        vector<vector<int> > nodesV;
+        vector<vector<int>> vec;
         
         if (root == nullptr)
-            return nodesV;
-        
-        std::queue<TreeNode *> parentQ;
-        std::queue<TreeNode *> childQ;
-        
-        std::queue<TreeNode *> *pQ = &parentQ;
-        std::queue<TreeNode *> *cQ = &childQ;
-        pQ->push(root);
-
+            return vec;
             
-    visit: // visit current level
+        std::queue<TreeNode *> thisQ;
+        std::queue<TreeNode *> nextQ;
+        
+        thisQ.push(root);
+        levelOrder(thisQ, nextQ, vec);
+        
+        return vec;
+    }
+    
+    void levelOrder(std::queue<TreeNode *>& thisQ, std::queue<TreeNode *>& nextQ, vector<vector<int> >& vec) {
+        // values of this levle
         vector<int> v;
-        while(!pQ->empty()) {
-            TreeNode *node = pQ->front();
+
+        while(!thisQ.empty()) {
+            TreeNode* node = thisQ.front();
             
             v.push_back(node->val);
             
             if (node->left != nullptr)
-                cQ->push(node->left);
+                nextQ.push(node->left);
             if (node->right != nullptr)
-                cQ->push(node->right);
-            
-            pQ->pop();
+                nextQ.push(node->right);
+                
+            thisQ.pop();
         }
-        nodesV.insert(nodesV.begin(), v);
+        vec.insert(vec.begin(), v);        
 
-        // if child level is not empty then visit child nodes
-        if (!cQ->empty()) {
-            std::swap(pQ, cQ);
-            goto visit;
-        }
-        
-        return nodesV;
+        // get the values of next level if it is not empty
+        if (!nextQ.empty())
+            levelOrder(nextQ, thisQ, vec);
     }
 };
-
-
 int main()
 {
     
