@@ -31,6 +31,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
@@ -41,7 +42,7 @@ public:
             
         // find a path
         if (root->left == nullptr && root->right == nullptr && root->val == sum) {
-            // insert current leaf node into the current path
+            // create a new path and insert current leaf node into the path
             vector<int> path;
             path.insert(path.begin(), root->val);
             
@@ -50,29 +51,25 @@ public:
             return pathV;
         }
         
-        
+        // find the left paths
         vector<vector<int> > leftPathV = pathSum(root->left, sum - root->val);
         if (!leftPathV.empty()) {
             // insert current node into all the paths of the left sub-tree
-            for (int i=0; i<leftPathV.size(); i++) {
-                leftPathV[i].insert(leftPathV[i].begin(), root->val);
-            }
+            for (auto&& aPath : leftPathV)
+                aPath.insert(aPath.begin(), root->val);
         }
         
+        // find the right paths
         vector<vector<int> > rightPathV = pathSum(root->right, sum - root->val);
         if (!rightPathV.empty()) {
             // insert current node into all the paths of the left sub-tree
-            for (int i=0; i<rightPathV.size(); i++) {
-                rightPathV[i].insert(rightPathV[i].begin(), root->val);
-            }
+            for (auto&& aPath : rightPathV) 
+                aPath.insert(aPath.begin(), root->val);
         }
         
-        // merge rightPathV to leftPathV
-        for (int i=0; i<rightPathV.size(); i++) {
-            leftPathV.push_back(rightPathV[i]);
-        }
-        rightPathV.clear();
-        
+        // merge left and right paths
+        leftPathV.insert(leftPathV.end(), rightPathV.begin(), rightPathV.end());
+
         return leftPathV;
     }
 };
