@@ -73,5 +73,45 @@ public:
         
         return v;
     }
+
+public:
+/*
+ * Iterative solution
+ * uniform soution for inorder, preorder and postorder
+ * easy to under stand
+ * I like it.
+ */
+vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> v;
+        
+        if (root == nullptr)
+            return v;
+        
+        std::stack<std::pair<TreeNode*, bool> > stk;
+        stk.push(make_pair(root, false));
+        TreeNode* node = nullptr;
+        bool visited = false;
+        
+        while(!stk.empty()) {
+            node = stk.top().first;
+            visited = stk.top().second;
+            stk.pop();
+            
+            if (visited) {
+                v.push_back(node->val);
+            } else { // R->L->V to stack, VLR to visit
+                // push R
+                if (node->right != nullptr)
+                    stk.push(make_pair(node->right, false));                 
+                // push L
+                if (node->left != nullptr)
+                    stk.push(make_pair(node->left, false));            
+                // push V
+                stk.push(make_pair(node, true));                       
+            }
+        }
+        
+        return v;
+    }    
 };
 

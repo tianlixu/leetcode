@@ -1,21 +1,21 @@
 /*
- Source : https://leetcode.com/problems/binary-tree-inorder-traversal/
- Author : Alex Xu
- Date   : May 21, 2015
- Problem:
+  Source : https://leetcode.com/problems/binary-tree-inorder-traversal/
+  Author : Alex Xu
+  Date   : May 21, 2015
+  Problem:
 
-Given a binary tree, return the inorder traversal of its nodes' values.
+  Given a binary tree, return the inorder traversal of its nodes' values.
 
-For example:
-Given binary tree {1,#,2,3},
-   1
-    \
-     2
-    /
-   3
-return [1,3,2].
+  For example:
+  Given binary tree {1,#,2,3},
+  1
+   \
+   2
+  /
+  3
+  return [1,3,2].
 
-Note: Recursive solution is trivial, could you do it iteratively?
+  Note: Recursive solution is trivial, could you do it iteratively?
 */
 
 /**
@@ -39,15 +39,14 @@ public:
     }
     
 private:
-    void inorderTraversal(TreeNode *root, vector<int> &v)
-        {
-            if(root == nullptr)
-                return ;
-          
-            inorder(root->left, v);
-            v.push_back(root->val);
-            inorder(root->right, v);
-        }
+    void inorderTraversal(TreeNode *root, vector<int> &v) {
+        if(root == nullptr)
+            return ;
+            
+        inorder(root->left, v);
+        v.push_back(root->val);
+        inorder(root->right, v);
+    }
 
 public:
     /*
@@ -77,4 +76,44 @@ public:
         
         return v;
     }
+
+public:
+/*
+ * Iterative solution.
+ * the uniform solution for inorder, preorder and post order
+ * easy to understand.
+ * I like it!
+ */    
+vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> v;
+        
+        if (root == nullptr)
+            return v;
+        
+        std::stack<std::pair<TreeNode*, bool> > stk;
+        stk.push(make_pair(root, false));
+        TreeNode* node = nullptr;
+        bool visited = false;
+        
+        while(!stk.empty()) {
+            node = stk.top().first;
+            visited = stk.top().second;
+            stk.pop();
+            
+            if (visited) {
+                v.push_back(node->val);
+            } else { // R->V->L to stack, LVR to visit
+                // push R
+                if (node->right != nullptr)
+                    stk.push(make_pair(node->right, false));
+                // push V
+                stk.push(make_pair(node, true));
+                // push L
+                if (node->left != nullptr)
+                    stk.push(make_pair(node->left, false));
+            }
+        }
+        
+        return v;
+    }    
 };
