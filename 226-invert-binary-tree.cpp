@@ -3,7 +3,7 @@
   Author : Alex Xu
   Date   : June 10, 2015
   Problem:
-  Invert a binary tree.
+  Invert a binary tree. That is to swap the left and right of each node.
 
        4
      /   \

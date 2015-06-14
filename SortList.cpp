@@ -1,11 +1,11 @@
 /*
- Source : https://oj.leetcode.com/problems/sort-list/
- Author : Alex Xu
- Date   : Mar 04, 2015
- Problem:
-Sort a linked list in O(n log n) time using constant space complexity.
+  Source : https://oj.leetcode.com/problems/sort-list/
+  Author : Alex Xu
+  Date   : Mar 04, 2015
+  Problem:
+  Sort a linked list in O(n log n) time using constant space complexity.
 
- Solution: MergeSort list.
+  Solution: MergeSort list.
 */
 
 /**
@@ -18,6 +18,9 @@ Sort a linked list in O(n log n) time using constant space complexity.
  */
 class Solution {
 public:
+    /*
+     * Merge Sort
+     */
     ListNode *sortList(ListNode *head) {
         if (head == NULL || head->next == NULL)
             return head;
@@ -35,7 +38,11 @@ public:
 
         return head;
     }
-    
+
+
+    /*
+      @ 21-merge-two-sorted-lists.cpp for more solutions to merge two sorted lists
+    */
     ListNode *merge(ListNode *headL, ListNode *headR) {
         if (headL == NULL)
             return headR;
@@ -88,6 +95,4 @@ public:
 
         return slow;
     }
-
-
 };
