@@ -38,7 +38,7 @@ public:
             mapCopy[p] = node;
             
             p = p->next;
-            q = node;
+            q = q->next;
         }
         q->next = NULL;
         

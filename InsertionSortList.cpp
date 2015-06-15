@@ -54,7 +54,7 @@ public:
             p->next = head;
             head = newHead;
         }
-
+        
         return head;
     }
 };

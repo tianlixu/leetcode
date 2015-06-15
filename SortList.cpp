@@ -19,7 +19,10 @@
 class Solution {
 public:
     /*
-     * Merge Sort
+     * Merge Sort:
+     * 1) break the current list into two lists: L and R
+     * 2) sort L, and sort R
+     * 3) merge L and R
      */
     ListNode *sortList(ListNode *head) {
         if (head == NULL || head->next == NULL)

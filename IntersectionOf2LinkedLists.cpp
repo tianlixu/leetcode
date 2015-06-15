@@ -36,43 +36,45 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int lenA = 0;
-        int lenB = 0;
-        ListNode *pA = headA;
-        ListNode *pB = headB;
-        
-        // get length of A
-        while (pA != NULL) {
-            ++ lenA;
-            pA = pA->next;
-        }
-        // get length of B
-        while (pB != NULL) {
-            ++ lenB;
-            pB = pB->next;
-        }
-        
-        // reset PA, PB
-        pA = headA;
-        pB = headB;
-        // suppose len(pA) always >= len(pB)
-        if (lenA < lenB) {
-            std::swap(lenA, lenB);
-            std::swap(pA, pB);
-        }
-        
-        // move forward pA: (lenA -lenB) steps
-        int diff = lenA - lenB;
+        int lenA = getLengthOfList(headA);
+        int lenB = getLengthOfList(headB);
+
+        // move forward diff steps in the longer list
+        int diff = abs(lenA - lenB);
         while (diff--)
-            pA = pA->next;
-        
-        for(int i=0; i<lenB && pA != NULL; ++i) {
-            if (pA == pB && pA != NULL)
-                return pA;
-            pA = pA->next;
-            pB = pB->next;
+        if (lenA > lenB)
+            headA = headA->next;
+        else
+            headB = headB->next;
+            
+        return getIntersectionNodeWithEqualLength(headA, headB);
+    }
+
+    /*
+     * get the intersection node in the two lists which have the same length
+     */
+    ListNode* getIntersectionNodeWithEqualLength(ListNode *headA, ListNode *headB) {
+        while (headA != nullptr) {
+            if (headA == headB)
+                return headA;
+            
+            headA = headA->next;
+            headB = headB->next;
         }
         
-        return NULL;
+        return nullptr;
+    }        
+
+    /*
+     * return the number of nodes in the list
+     */
+    int getLengthOfList(ListNode* head) {
+        int length = 0;
+        while (head != nullptr) {
+            length ++;
+            head = head->next;
+        }
+        
+        return length;
     }
 };

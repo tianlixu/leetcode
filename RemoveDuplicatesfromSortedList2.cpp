@@ -37,23 +37,20 @@ void printList(ListNode *head) {
 
 class Solution {
 public:
-    ListNode *deleteDuplicates(ListNode *head) {
-        // recursive solution
-        if (head == NULL || head->next == NULL)
+    /*
+     * Recursive solution
+     */
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (head == nullptr || head->next == nullptr)
             return head;
-
-        ListNode *p = head->next;
-        while (p != NULL && head->val == p->val) {
-            p = p->next;
-        }
         
-        if (head->next != p){ // 1(h), 1, 2(p)
-            head = deleteDuplicates(p); // reset head
-        } else { // 1(h), 2(p), 3
-            head->next = deleteDuplicates(p); // relink head->next
+        if (head->val == head->next->val) {
+            // remove the first dup node(the head)
+            return deleteDuplicates(head->next);
+        } else {
+            head->next = deleteDuplicates(head->next);
+            return head;
         }
-
-        return head;
     }
 
 /*

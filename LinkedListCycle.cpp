@@ -29,10 +29,7 @@ public:
         // pointer to step forward two steps
         ListNode *two = head;
         
-        while (two != nullptr) {
-            if (two->next == nullptr)
-                return false;
-            
+        while (two != nullptr && two->next != nullptr) {
             two = two->next->next;
             one = one->next;
             
