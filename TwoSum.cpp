@@ -23,6 +23,24 @@ using namespace std;
 
 class Solution {
 public:
+    // Time: O(n)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        std::vector<int> v;
+        std::unordered_map<int, int> ht;
+
+        for (int i=0; i<nums.size(); ++i) {
+            if (ht.find(nums[i]) == ht.end()) {
+                ht[target - nums[i]] = i;
+            } else {
+                v.push_back(ht[nums[i]] + 1);
+                v.push_back(i+1);
+            }
+        }
+
+        return v;        
+    }
+
+    // Time: O(n^2)
     vector<int> twoSum(vector<int> &numbers, int target) {
         std::vector<int> v;
 
@@ -36,25 +54,8 @@ public:
         }
 
         return v;
-    }
-
-    vector<int> twoSum2(vector<int> &numbers, int target) {
-        std::vector<int> v;
-        std::map<int, int> m;
-
-        for (int i=0; i<numbers.size(); ++i) {
-            if (m.find(numbers[i]) == m.end()) {
-                m[target - numbers[i]] = i;
-            } else {
-                v.push_back(m[numbers[i]] + 1);
-                v.push_back(i+1);
-            }
-        }
-            
-        return v;
-    }
+    }    
 };
-
 
 int main()
 {
