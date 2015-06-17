@@ -84,7 +84,7 @@ public:
 
 public:
     /*
-     * Devide and Conquer
+     * Divide and Conquer
      * Time: O(nlogn)
      */
     int maxSubArray2(vector<int>& nums) {
