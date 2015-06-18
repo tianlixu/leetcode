@@ -2,11 +2,18 @@
 using namespace std;
 
 /*
- * Remove Duplicates from Sorted Array
- * Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
- * Do not allocate extra space for another array, you must do this in place with constant memory.
- * For example, Given input array A = [1,1,2],
- * Your function should return length = 2, and A is now [1,2].
+  Source : https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+  Author : Alex Xu
+  Date   : June 18, 2015
+  Problem:
+
+  Remove Duplicates from Sorted Array
+  Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+  Do not allocate extra space for another array, you must do this in place with constant memory.
+  For example, Given input array A = [1,1,2],
+  Your function should return length = 2, and A is now [1,2].
+
+  Tag : Array TwoPointers
  */
 int rmvDup(int a[], unsigned int len)
 {
@@ -22,22 +29,6 @@ int rmvDup(int a[], unsigned int len)
     }
 
     return cursor+1;
-}
-
-int rmvDup(int a[], unsigned int len, int keep)
-{
-    if (len <= keep) {
-        return len;
-    }
-        
-    int cursor = keep;
-    for (int i=keep; i<len; i++) {
-        if (a[i] != a[cursor - keep]) {
-            a[cursor++] = a[i];
-        }
-    }
-
-    return cursor;
 }
 
 void printArray(int a[], unsigned int len)
