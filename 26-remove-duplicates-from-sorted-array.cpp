@@ -48,6 +48,26 @@ void printArray(int a[], unsigned int len)
     cout << endl;
 }
 
+/*
+ * C++ version
+ */
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+            
+        int cursor = 0;
+        for (int i=0; i<nums.size(); ++i) {
+            if (nums[cursor] != nums[i]) {
+                nums[++cursor] = nums[i];
+            }
+        }
+        
+        return cursor+1;
+    }
+};
+
 int main()
 {
     int a[] = {1, 1, 1, 2, 3, 4, 4, 4, 4, 5, 6, 6, 7};
