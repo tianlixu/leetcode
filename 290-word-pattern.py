@@ -1,7 +1,7 @@
 /*
-  Source : https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+  Source : https://leetcode.com/problems/word-pattern/
   Author : Alex Xu
-  Date   : May 22, 2015
+  Date   : Oct 07, 2015
   Problem:
   Given a pattern and a string str, find if str follows the same pattern.
 
