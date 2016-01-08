@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cstdlib>
 #include <climits> // INT_MIN, INT_MAX
 
 using namespace std;
@@ -21,6 +22,17 @@ namespace fos {
         cout << endl;
     }
 
+    /*
+     * get a random between [min, max]
+     * e.g, get a random number between 0 and 10
+     *
+     * std::srand(time(0));
+     * int a = random(0, 10);
+     */
+    int random(int min, int max)
+    {
+        return (std::rand() % (max - min + 1) + min);
+    }
 }
 
 #endif
