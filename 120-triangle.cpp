@@ -48,3 +48,22 @@ public:
     }
 };
 
+/*
+ time exceeded for a long input
+ but functionally it is correct
+*/
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        return miniPath4Point(triangle, 0, 0);
+    }
+    
+    int miniPath4Point(vector<vector<int>>& triangle, int row, int column) {
+        if (row == triangle.size()-1)
+            return triangle[row][column];
+        
+        int miniChildLeft = miniPath4Point(triangle, row+1, column);
+        int miniChildRight = miniPath4Point(triangle, row+1, column+1);
+        return triangle[row][column] + min(miniChildLeft, miniChildRight);
+    }
+};
