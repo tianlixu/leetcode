@@ -17,6 +17,10 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 Note:
 Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
 */
+
+/*
+  top-down solution. You can also use bottom-up solution which modifies the input triangle and return triangle[0][0] at the end.
+ */                                      
 class Solution {
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
