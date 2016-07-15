@@ -9,6 +9,32 @@ Given a m x n grid filled with non-negative numbers, find a path from top left t
 Note: You can only move either down or right at any point in time.
 */
 
+
+/*
+  Tag: DP
+  
+  +-----+-----+-----+-----+
+  |     | m-1 |     |     |
+  |     | n   |     |     |
+  +-----+-----+-----+-----+
+  | m   | m   |     |     |
+  | n-1 | n   |     |     |
+  +-----+-----+-----+-----+
+  |     |     |     |     |
+  |     |     |     |     |
+  +-----+-----+-----+-----+
+
+  To reach cell (m, n), you can
+  either 
+    move down from cell (m-1, n) if (m-1, n) exists. The sum for this path is: sum1 = dp(m-1, n) + grid[m,n]
+  or
+    move right from (m, n-1) if (m, n-1) exists. The sum for this path is: sum2 = dp(m, n-1) + grid[m,n]
+
+  Finally, the minimum path sum to reach (m, n) is: min(sum1, sum2).
+
+  The DP formula is:
+    dp(m,n) = min(dp(m-1, n), dp(m, n-1)) + grid[m][n];
+ */
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
