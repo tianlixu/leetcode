@@ -10,8 +10,8 @@
 */
 
 /* 
- Using solution from 53: get the maximum subarray, the following solution
- is functionally correct but fails with Time Limit Exceeded.
+   Using solution from 53: get the maximum subarray, the following solution
+   is functionally correct but fails with Time Limit Exceeded.
 */
 class Solution {
 public:
@@ -42,39 +42,41 @@ public:
     int maxSubArray(vector<int>& nums) {
         int maxSum = INT_MIN;                                      
         int f = 0;                                                 
-        for (int i=0; i<nums.size(); i++) {                                                           f = std::max(f + nums[i], nums[i]);                                                       
+        for (int i=0; i<nums.size(); i++) {  
+            f = std::max(f + nums[i], nums[i]);                                                       
             maxSum = std::max(f, maxSum);
         }                                                                                                                               
-        return maxSum == INT_MIN ? 0 : maxSum;                                                                  
-    }               
+        return maxSum == INT_MIN ? 0 : maxSum;                                                                      }               
 };
 
-
 /*
-https://discuss.leetcode.com/topic/50933/8ms-c-solution-o-n-time-o-1-space
-https://discuss.leetcode.com/topic/41049/clear-c-solution/3
-https://discuss.leetcode.com/topic/39751/my-explanation-for-o-n-solution
+  From a financial point of view, you should guarantee that you have the maximum money left in your pocket at any moment.
+  As an investor, the more money left, the happier you are.
 
-First assume that we have no money, so buy1 means that we have to borrow money from others, we want to borrow less so that we have to make our balance as max as we can(because this is negative).
+  For each Transaction, you Buy it(spend money price[i]: your current money - prices[i])
+  and then you Sell it(earn money price[i]: your current money + prices[i])
 
-    sell1 means we decide to sell the stock, after selling it we have price[i] money and we have to give back the money we owed, so we have price[i] - |buy1| = prices[i ] + buy1, we want to make this max.
+  The profit after B1:  0 - price[i]
+  The profit after S1: B1 + price[i]
+  The profit after B2: S1 - price[i]
+  The profit after S2: B2 + price[i]
 
-    buy2 means we want to buy another stock, we already have sell1 money, so after buying stock2 we have buy2 = sell1 - price[i] money left, we want more money left, so we make it max
-
-    sell2 means we want to sell stock2, we can have price[i] money after selling it, and we have buy2 money left before, so sell2 = buy2 + prices[i], we make this max.
-
-    So sell2 is the most money we can have.
-
-    Hope it is helpful and welcome quesions!
-
-public int maxProfit(int[] prices) {
-    int sell1 = 0, sell2 = 0, buy1 = Integer.MIN_VALUE, buy2 = Integer.MIN_VALUE;
-    for (int i = 0; i < prices.length; i++) {
-        buy1 = Math.max(buy1, -prices[i]);
-        sell1 = Math.max(sell1, buy1 + prices[i]);
-        buy2 = Math.max(buy2, sell1 - prices[i]);
-        sell2 = Math.max(sell2, buy2 + prices[i]);
-    }
-    return sell2;
-}
+  So, max(B2) is the solution for this problem.
 */
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int s1 = 0;       // the money you have after s1
+        int s2 = 0;       // the money you have after s2
+        int b1 = INT_MIN; // the money you have after b1
+        int b2 = INT_MIN; // the money you have after b2
+
+        for (int price : prices) {
+            b1 = max(b1, 0  - price);
+            s1 = max(s1, b1 + price);
+            b2 = max(b2, s1 - price);
+            s2 = max(s2, b2 + price);
+        }
+        return s2;
+    }
+};
