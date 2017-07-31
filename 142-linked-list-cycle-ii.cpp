@@ -25,6 +25,7 @@
  * A-------->-------B             |
  *                   \            /
  *                    \----<-----/
+ * meet at C
  * Distance: A->B: x
  * Distance: B->C: y
  * Circle: B->C->B: c
