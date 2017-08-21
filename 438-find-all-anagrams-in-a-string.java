@@ -66,8 +66,8 @@ public class Solution {
                 ret.add(left);
             }
 
+            // if window is full, window.size = p.length, move one char out of the window from left
             if (right - left == p.length() - 1) {
-                // move one char out of the window from left
                 if (h[s.charAt(left)] >= 0) {
                     // if this char belongs to 'p'
                     count --;
@@ -87,32 +87,65 @@ public class Solution {
     }
 }
 
+// sliding window with hashmap
 public class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        // Key: character, Value: counter of its appearance
+        List<Integer> ret = new ArrayList<>();
+        if (s == null || p == null || s.length() == 0 || p.length() == 0 || s.length() < p.length()) {
+            return ret;
+        }
+
+        // hash maps, Key: character, Value: counter of its appearance
         HashMap<Character, Integer> m = new HashMap<Character, Integer>();
-
-        for (int i=0; i< p.length(); i++) {
-            if (m.containsKey(p.charAt(i))) {
-                m.put(p.charAt(i), m.get(p.charAt(j)) + 1);
+        for (char c : p.toCharArray()) {
+            if (m.containsKey(c)) {
+                m.put(c, m.get(c) + 1);
             } else {
-                m.put(p.charAt(i), 1);
+                m.put(c, 1);
             }
         }
 
-        HashMap<Character, Integer> m2 = new HashMap<Character, Integer>();
-        m2.putAll(m);
+        // sliding window [left, right]
+        int left = 0;
+        int right = 0;
+        int count = 0;
 
-        for (int i=0, int j=0; j<s.length(); j++) {
-            if (! m2.containsKey(s.charAt(j))) {
-                continue;
+        while (right < s.length()) {
+            // move one char into the window from right
+            char c = s.charAt(right);
+            if (m.containsKey(c)) {
+                // decrease its value by one
+                m.put(c, m.get(c) - 1);
+                // if this char still belongs to 'p'
+                if (m.get(c) >= 0) {
+                    count ++;
+                }
             }
 
-            int v = m2.get(s.charAt(j));
-            if (v == 0) {
-                ++i;
+            if (count == p.length()) {
+                ret.add(left);
             }
-                
+
+            // if window is full, window.size = p.length, move one char out of the window from left
+            if (right - left == p.length() - 1) {
+                c = s.charAt(left);
+                if (m.containsKey(c)) {
+                    // if this char belongs to 'p'
+                    if (m.get(c) >= 0) {
+                        count --;
+                    }
+                    // recover the hash value
+                    m.put(c, m.get(c) + 1);
+                }
+
+                // adjust window, moving one char forward from left
+                left ++;
+            }
+
+            // adjust window, moving one char forward from right
+            right ++;
         }
+
+        return ret;
     }
 }
