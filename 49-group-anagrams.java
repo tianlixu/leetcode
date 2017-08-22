@@ -18,7 +18,7 @@
 */
 
 /*
- * a group id identified by a unique key, how to get/generate that key? hash!
+ * a group is identified by a unique key, how to get/generate that key? hash!
  * The problems now becomes how to has a string.
  *
  * use prime number multiplication
