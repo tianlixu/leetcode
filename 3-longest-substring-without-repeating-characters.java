@@ -6,7 +6,8 @@
 Given a string, find the length of the longest substring without repeating characters. For example, the longest substring without repeating letters for "abcabcbb" is "abc", which the length is 3. For "bbbbb" the longest substring is "b", with the length of 1.
 
 Solution:
-Greedy algorithm, Time O(n), Space O(1)
+sliding window, Time O(n), Space O(1)
+Tag: sliding window, hash
 */
 
 public class Solution {
