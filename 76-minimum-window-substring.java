@@ -63,6 +63,17 @@ class Solution {
             while(count == m.size()) { // find a solution
                 if (right - left + 1 < len) {
                     len = right - left + 1;
+                    /*
+                     * public String substring(int beginIndex, int endIndex)
+                     * Returns a new string that is a substring of this string.
+                     * The sbstring begins at the specified beginIndex and extends
+                     * to the character at index endIndex - 1. Thus the length of
+                     * the substring is endIndex-beginIndex.
+                     *
+                     * Parameters:
+                     * beginIndex - the beginning index, inclusive.
+                     * endIndex - the ending index, exclusive.
+                     */
                     ret = s.substring(left, right + 1);
                 }
 
