@@ -63,3 +63,25 @@ class Solution {
         return sum[m-1][n-1];
     }
 }
+
+/* 
+ * recursive solution,
+ * Time Limit Exceeded
+ */
+class Solution {
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+            
+        return helper(grid, m-1, n-1);
+    }
+    public int helper(int[][] grid, int m, int n) {
+
+        if (m == 0 && n == 0)
+            return grid[0][0];
+
+        return grid[m][n] + (m == 0 ? helper(grid, m, n-1)
+                             : n == 0 ? helper(grid, m-1, n)
+                             : Math.min(helper(grid, m-1, n), helper(grid, m, n-1)));
+    }
+}
