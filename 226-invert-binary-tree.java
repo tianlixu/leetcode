@@ -34,7 +34,7 @@ public class Solution {
      *
      * Complexity Analysis
      * Since each node in the tree is visited only once, the time complexity is O(n),
-     * where nn is the number of nodes in the tree. We cannot do better than that, since
+     * where n is the number of nodes in the tree. We cannot do better than that, since
      * at the very least we have to visit each node to invert it.
      *
      * Because of recursion, O(h) function calls will be placed on the stack in the worst
