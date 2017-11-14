@@ -4,14 +4,14 @@
   Date   : Jul 28, 2016
   Problem:
  
-After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
+  After robbing those houses on that street, the thief has found himself a new place for his thievery so that he will not get too much attention. This time, all houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, the security system for these houses remain the same as for those in the previous street.
 
-Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+  Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
 */
 
 /*
- Tag: DP
- Solution:
+  Tag: DP
+  Solution:
   Continue with 198-house-robber, the solution for this problem is quite straightforward:
 
   Since you cannot rob both the first and the last house because they are neighbours, just create two seperate vectors, one excluding the first house, and the other  excluding the last house. The best solution generates from these two vectors using the original solution for 198.
@@ -22,8 +22,8 @@ Given a list of non-negative integers representing the amount of money of each h
   The max(A, B) becomes the final solution for this problem.
 */
 class Solution {
-public:
-    int rob(vector<int>& nums) {
+    public:
+        int rob(vector<int>& nums) {
         int len = nums.size();
         if (len == 0)
             return 0;
