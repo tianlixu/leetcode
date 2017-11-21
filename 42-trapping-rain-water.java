@@ -78,7 +78,6 @@ class Solution {
                 } else {
                     maxofmin = height[i];
                 }
-
                 ++ i;
             } else {
                 if (height[j] < maxofmin) {
@@ -86,7 +85,6 @@ class Solution {
                 } else {
                     maxofmin = height[j];
                 }
-
                 -- j;
             }
         }
