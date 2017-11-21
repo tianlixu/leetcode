@@ -14,7 +14,8 @@ Tag: divide and conquer, two pointers, stack
 /*
  * Divide and conquer
  * I was tring to veriy that this is a solution. I thought it would be rejected due to the performance issue.
- * A suprise that it was ACCEPTED.
+ * A suprise that it was ACCEPTED. 
+ * The runtime of this solution beats 20% of java submissions
  */
 class Solution {
     public int trap(int[] height) {
@@ -55,5 +56,41 @@ class Solution {
         }
         
         return index;
+    }
+}
+
+
+/*
+ * two pointers, quite effective solution
+ * the runtime of this solution beats 90% of java submissions
+ */
+class Solution {
+    public int trap(int[] height) {
+        int sum = 0;
+        int maxofmin = 0;
+        int i = 0;
+        int j = height.length - 1;
+
+        while (i < j) {
+            if (height[i] < height[j]) {
+                if (height[i] < maxofmin) {
+                    sum += maxofmin - height[i];
+                } else {
+                    maxofmin = height[i];
+                }
+
+                ++ i;
+            } else {
+                if (height[j] < maxofmin) {
+                    sum += maxofmin - height[j];
+                } else {
+                    maxofmin = height[j];
+                }
+
+                -- j;
+            }
+        }
+
+        return sum;
     }
 }
