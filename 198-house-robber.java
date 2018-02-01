@@ -40,6 +40,6 @@ class Solution {
             dp1 = dp;
         }
         
-        return dp1;
+        return dp;
     }
 }
