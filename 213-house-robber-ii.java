@@ -17,7 +17,7 @@
   Since you cannot rob both the first and the last house because they are neighbours, just create two seperate vectors, one excluding the first house, and the other  excluding the last house. The best solution generates from these two vectors using the original solution for 198.
 
   1, 2, 3, 4,...,n
-  A: if you rob 1, then you cannot rob n, it becomes problem 198 to find solution for a[1] + dp(3,..., n-1)
+  A: if you rob 1, then you cannot rob 2 and n, it becomes problem 198 to find solution for a[1] + dp(3,..., n-1)
   B: if you do not rob 1, then, it becomes problem 198 to find solution for  dp(2,..., n)
   The max(A, B) becomes the final solution for this problem.
 */
