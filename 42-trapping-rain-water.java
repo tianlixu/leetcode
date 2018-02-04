@@ -92,3 +92,30 @@ class Solution {
         return sum;
     }
 }
+
+class Solution {                                                                               
+    public int trap(int[] height) {                                                            
+        int sum = 0;             
+        
+        int min = 0;
+        int maxofmin = 0;                                                                      
+        int i = 0;                                                                             
+        int j = height.length - 1;                                                             
+        while (i < j) {                                                                        
+            if (height[i] < height[j]) {
+                min = height[i];                                                           
+                ++ i;                                                                          
+            } else {                                                                           
+                min = height[j];                                                                           
+                -- j;                                                                          
+            }
+            
+            if (min < maxofmin) {
+                sum += maxofmin - min;                                               
+            } else {                                                                       
+                maxofmin = min;                                                      
+            }  
+        }                                                                                      
+        return sum;                                                                            
+    }                                                                                          
+} 

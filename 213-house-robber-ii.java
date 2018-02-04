@@ -17,7 +17,7 @@
   Since you cannot rob both the first and the last house because they are neighbours, just create two seperate vectors, one excluding the first house, and the other  excluding the last house. The best solution generates from these two vectors using the original solution for 198.
 
   1, 2, 3, 4,...,n
-  A: if you rob 1, then you cannot rob n, it becomes problem 198 to find solution for a[1] + dp(1, 2,..., n-1)
+  A: if you rob 1, then you cannot rob n, it becomes problem 198 to find solution for a[1] + dp(3,..., n-1)
   B: if you do not rob 1, then, it becomes problem 198 to find solution for  dp(2,..., n)
   The max(A, B) becomes the final solution for this problem.
 */
@@ -46,13 +46,15 @@ class Solution {
     */
     /* the above cases for 1, 2 and 3 have already been covered in default branch, thus we have this */
     public int rob(int[] nums) {
-        if (nums.length == 0)
+        if (nums.length == 0) {
             return 0;
-        else
+        }
+        else {
             return Math.max(robAline(nums, 1, nums.length), nums[0] + robAline(nums, 2, nums.length-1));
+        }
     }
 
-    public int robAline(int[] nums, int low, int high) {
+    public int robAline(int[] nums, int low, int high) { // array [low, high)
         int dp0 = 0;
         int dp1 = 0;
         int dp = 0;
@@ -65,6 +67,6 @@ class Solution {
             dp1 = dp;
         }
 
-        return dp1;
+        return dp;
     }
 }
