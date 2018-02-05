@@ -48,6 +48,10 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+/*
+ * Run time: 803ms
+ */
 class Solution {
     public int rob(TreeNode root) {
         if (root == null) {
@@ -66,5 +70,42 @@ class Solution {
         int dp2 = (root.left == null ? 0 : rob(root.left)) + (root.right == null ? 0 : rob(root.right));
 
         return Math.max(dp1, dp2);
+    }
+}
+
+/*
+ * Continue with the above solution, this one uses a hash map to avoid a re-caculation for a a given node.
+ * Run time: 7ms
+ */
+class Solution {
+    public int rob(TreeNode root) {
+        HashMap<TreeNode, Integer> m = new HashMap<TreeNode, Integer>();
+        return rob(root, m);
+    }
+    
+    public int rob(TreeNode root, HashMap<TreeNode, Integer> m) {
+        if (root == null) {              
+            return 0;
+        } 
+        if (root.left == null && root.right == null) {
+            return root.val;
+        }
+        
+        Integer dp = m.get(root);
+        if (dp != null) {
+            return dp.intValue();
+        }
+
+        // take root                                                                                     
+        int dp1 = root.val                                                                               
+            + (root.left == null ? 0 : rob(root.left.left, m) + rob(root.left.right, m))                       
+            + (root.right == null ? 0 : rob(root.right.left, m) + rob(root.right.right, m));                   
+        // do not take root                                                                               
+        int dp2 = (root.left == null ? 0 : rob(root.left, m)) + (root.right == null ? 0 : rob(root.right, m)); 
+
+        dp = Math.max(dp1, dp2);          
+        m.put(root, dp);
+        
+        return dp;
     }
 }
