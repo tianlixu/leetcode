@@ -49,7 +49,7 @@
  * }
  */
 
-/*
+/**
  * Run time: 803ms
  */
 class Solution {
@@ -73,7 +73,7 @@ class Solution {
     }
 }
 
-/*
+/**
  * Continue with the above solution, this one uses a hash map to avoid a re-caculation for a a given node.
  * Run time: 7ms
  */
@@ -87,9 +87,6 @@ class Solution {
         if (root == null) {              
             return 0;
         } 
-        if (root.left == null && root.right == null) {
-            return root.val;
-        }
         
         Integer dp = m.get(root);
         if (dp != null) {
@@ -106,6 +103,39 @@ class Solution {
         dp = Math.max(dp1, dp2);          
         m.put(root, dp);
         
+        return dp;
+    }
+}
+
+/**
+ * Avoid overlaping, reduced run time
+ * Run time: 1ms
+ */
+class Solution {
+    public int rob(TreeNode root) {
+        int[] dp = robSub(root);
+        return Math.max(dp[0], dp[1]);
+    }
+
+    /**
+     * return an array of two values
+     * dp[0] is the one without taking root
+     * dp[1] is the one with taking root
+     */
+    private int[] robSub(TreeNode root) {
+        if (root == null){
+            return new int[2]; // return [0, 0]
+        }
+
+        int[] left = robSub(root.left);
+        int[] right = robSub(root.right);
+        int[] dp = new int[2];
+
+        // no root
+        dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        // with root
+        dp[1] = root.val + left[0] + right[0];
+
         return dp;
     }
 }
