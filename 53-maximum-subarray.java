@@ -38,39 +38,31 @@ class Solution {
      * Dynamic programming
      *
      * The state formular is:
-     *     f[i] - the MSS(Maximum Subarray Sum) of subarray a[0], a[0,1] ... a[0,1,...,i-1,i]
+     *     dp[i] - the MSS(Maximum Subarray Sum) of subarray a[j,...,i] (j >= 0)
+     *             dp[i] = a[j] + a[...] + a[i]
+     *             the last element of that subarray must be the last element in array a[0,1,...,i]
      * then
-     *     f[i+1] = max(f[i] + a[i+1], a[i+1])
-     * So /*
-     *     max(f[0], f[1] ... f[n]) is the answer.
+     *     dp[i+1] = max(dp[i] + a[i+1], a[i+1])
+     * so
+     *     max(dp[0], dp[1] ... dp[n]) is the answer.
+     *
+     * The meaning of dp[i] is the current sum in previous solution.
      *
      * Time: O(n), Space: O(1)
      * 
      * Your run time beats 88.24% of java submissions
      */
     class Solution {
-        /*
-         * Dynamic programming
-         *
-         * The state formular is:
-         *     f[i] - the MSS(Maximum Subarray Sum) of subarray a[0], a[0,1] ... a[0,1,...,i-1,i]
-         * then
-         *     f[i+1] = max(f[i] + a[i+1], a[i+1])
-         * So /*
-         *     max(f[0], f[1] ... f[n]) is the answer.
-         *
-         * Time: O(n), Space: O(1)
-         */
              public int maxSubArray(int[] nums) {
-             int maxSum = Integer.MIN_VALUE;
-             int f = 0; // current sum
+             int dpMax = Integer.MIN_VALUE;
+             int dpi = 0;
  
              for (int num : nums) {
-                 f = Math.max(f + num, num);
-                 maxSum = Math.max(maxSum, f);
+                 dpi = Math.max(dpi + num, num);
+                 dpMax = Math.max(dpMax, dpi);
              }
 
-             return maxSum;
+             return dpMax;
          }
     }
 }
