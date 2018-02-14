@@ -51,6 +51,7 @@ class Solution {
      * Time: O(n), Space: O(1)
      * 
      * Your run time beats 88.24% of java submissions
+     * Reference: https://en.wikipedia.org/wiki/Maximum_subarray_problem
      */
     class Solution {
              public int maxSubArray(int[] nums) {
