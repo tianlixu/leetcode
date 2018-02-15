@@ -53,18 +53,84 @@ class Solution {
      * Your run time beats 88.24% of java submissions
      * Reference: https://en.wikipedia.org/wiki/Maximum_subarray_problem
      */
-    class Solution {
-             public int maxSubArray(int[] nums) {
-             int dpMax = Integer.MIN_VALUE;
-             int dpi = 0;
+    public int maxSubArray(int[] nums) {
+        int dpMax = Integer.MIN_VALUE;
+        int dpi = 0;
  
-             for (int num : nums) {
-                 dpi = Math.max(dpi + num, num);
-                 dpMax = Math.max(dpMax, dpi);
-             }
+        for (int num : nums) {
+            dpi = Math.max(dpi + num, num);
+            dpMax = Math.max(dpMax, dpi);
+        }
 
-             return dpMax;
-         }
+        return dpMax;
     }
+
+    /*
+     * Divide and Conquer
+     *
+     * Divide the problem
+     * Divide the array a[0,...,n] into two sub arrays a[0,...,mid] and a[mid+1,...,n]
+     * where mid = (0 + n) / 2
+
+     * The maximum sub array may exist in a[0,...,mid] which is
+     * maxSumLeft = maxSubarray(a[0,...,mid]) = a[i] + ... + a[j] 
+     * where 0 =< i < j <= mid
+     * 
+     * The maximum sub array may exist in a[mid,...,n] which is
+     * maxSumRight = maxSubarray(a[mid+1,...,n]) = a[i] + ... + a[j] 
+     * where mid+1 =< i < j <= n
+
+     * Or the maxmimu sub array may exist part in a[0,...,mid] and part in a[mid+1,...,n] which is
+     * maxSumCross = maxSumCrossLeft + maxSumCrossRight, where
+     * maxSumCrossLeft = a[i] + .. + a[mid] where 0 =< i < mid
+     * maxSumCrossLeft = a[mid] + .. + a[i] where mid < i <= n
+     *
+     * Time: O(nlogn)
+     */
+    public int maxSubArray(int[] nums) {
+        return maxSubArray(nums, 0, nums.length - 1);
+    }
+
+    public int maxSubArray(int[] nums, int low, int high) {
+        if (low == high) {
+            return nums[low];
+        }
+
+        int mid = (low + high) / 2;
+
+        // the max sub array in the left, low =< i <= j <= mid
+        int maxSumLeft = maxSubArray(nums, low, mid);
+        // the max sub array in the left, mid < i <= j <= high
+        int maxSumRight = maxSubArray(nums, mid+1, high);
+        // the max sub array is crossing the middle, low =< i <= mid < j <= high
+        int maxSumCross = maxSubArrayCross(nums, low, mid, high);
+
+        return Math.max(Math.max(maxSumLeft, maxSumRight), maxSumCross);
+    }
+
+    /*
+     * Time: O(n)
+     */
+    private int maxSubArrayCross(int[] nums, int low, int mid, int high) {
+        int maxSumCrossLeft = Integer.MIN_VALUE;
+        int maxSumCrossRight = Integer.MIN_VALUE;
+
+        int maxSumTemp = 0;
+        // left max sub array
+        for (int i = mid; i>= low; i--) {
+            maxSumTemp += nums[i];
+            maxSumCrossLeft = Math.max(maxSumCrossLeft, maxSumTemp);
+        }
+
+        maxSumTemp = 0;
+        // right max sub array
+        for (int j = mid + 1; j <= high; j++) {
+            maxSumTemp += nums[j];
+            maxSumCrossRight = Math.max(maxSumCrossRight, maxSumTemp);
+        }
+
+        return maxSumCrossLeft + maxSumCrossRight;
+    }
+
 }
 
