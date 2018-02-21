@@ -21,7 +21,7 @@ class Solution:
                 return self.findKthSmallest(nums1, nums2, total//2 + 1)
             else:
                 # even number [1, 2, 3, 4] -> (list[4/2] -1 + list[4/2])/2.0 = (list[1] + list[2])/2.0, index 1 is the 2nd and index 2 is the 3rd
-                return (self.findKthSmallest(nums1, nums2, total//2) + self.findKthSmallest(nums1, nums2, total//2 + 1)) / 2.0
+                return (self.findKthSmallest(nums1, nums2, total // 2) + self.findKthSmallest(nums1, nums2, total // 2 + 1)) / 2
             
         def findKthSmallest(self, a, b, k):
             """
@@ -30,21 +30,27 @@ class Solution:
             :type k: int
             """
             if len(a) > len(b):
-                return self.findKthSmallest(b, a, k)
+                return self.findKthSmallest(b, a, k) # make sure a is always shorter
             
             # exit condition: a is empty or k==1
             if not a:
-                return b[k-1]
+                return b[k - 1]
             if k == 1:
                 return min(a[0], b[0])
             
             # devide k into two parts ka elements in a and kb elements in b, where k = ka + kb
-            ka = min(k//2, len(a))
+            # a is devided into two sub arrays: a-left: a[:ka] and a-right: a[ka:]
+            # b is devided into two sub arrays: b-left: b[:kb] and b-right: a[kb:]
+            # the kth smallest number now may be in a-left, a-right, b-left or b-right
+            ka = min(k // 2, len(a))
             kb = k - ka
             
             if a[ka - 1] < b[kb - 1]:
+                # the kth is is a-right or b-left
                 return self.findKthSmallest(a[ka:], b[:kb], kb) # ignore a[:ka]
             elif a[ka -1] > b[kb - 1]:
+                # the kth is is a-left or b-right
                 return self.findKthSmallest(a[:ka], b[kb:], ka) # ignore a[:kb]
             else:
-                return a[ka-1]; # or return b[k-1]
+                # a[ka - 1] (b[kb - 1] is the kth
+                return a[ka - 1]; # or return b[kb - 1]
