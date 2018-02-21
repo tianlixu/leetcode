@@ -16,12 +16,12 @@ class Solution:
             :rtype: float
             """
             total = len(nums1) + len(nums2)
-            if total % 2 == 1:
+            if total%2 == 1:
                 # odd number [1, 2, 3, 4, 5] -> list[5/2] = list[2] = 3: index 2 is the 3rd
                 return self.findKthSmallest(nums1, nums2, total//2 + 1)
             else:
                 # even number [1, 2, 3, 4] -> (list[4/2] -1 + list[4/2])/2.0 = (list[1] + list[2])/2.0, index 1 is the 2nd and index 2 is the 3rd
-                return (self.findKthSmallest(nums1, nums2, total // 2) + self.findKthSmallest(nums1, nums2, total // 2 + 1)) / 2
+                return (self.findKthSmallest(nums1, nums2, total//2) + self.findKthSmallest(nums1, nums2, total//2 + 1)) / 2
             
         def findKthSmallest(self, a, b, k):
             """
@@ -42,7 +42,7 @@ class Solution:
             # a is devided into two sub arrays: a-left: a[:ka] and a-right: a[ka:]
             # b is devided into two sub arrays: b-left: b[:kb] and b-right: a[kb:]
             # the kth smallest number now may be in a-left, a-right, b-left or b-right
-            ka = min(k // 2, len(a))
+            ka = min(k//2, len(a))
             kb = k - ka
             
             if a[ka - 1] < b[kb - 1]:
