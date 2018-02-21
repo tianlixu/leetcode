@@ -38,12 +38,9 @@ class Solution:
         """
         if not root:
             return root
-        
-        left = self.invertTree(root.left)
-        right = self.invertTree(root.right)
-        
-        root.left = right
-        root.right = left;
+
+        # swap left and rigth with multiple assignments
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         
         return root
 
@@ -68,9 +65,8 @@ class Solution:
         while l:
             node = l.pop()
 
-            left = node.left
-            node.left = node.right
-            node.right = left
+            # swap node.left and node.right with multiple assignments
+            node.left, node.right = node.right, node.left
             
             if node.left is not None:
                 l.append(node.left)

@@ -38,7 +38,7 @@ public class Solution {
      * at the very least we have to visit each node to invert it.
      *
      * Because of recursion, O(h) function calls will be placed on the stack in the worst
-     * case, where h is the height of the tree. Because h∈O(n), the space complexity is O(n).
+     * case, where h is the height of the tree. Because h c O(n), the space complexity is O(n).
      */
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
