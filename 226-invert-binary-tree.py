@@ -32,6 +32,7 @@ Your runtime beats 100.00 % of python3 submissions. :O, Nobody is using Python3 
 class Solution:
     def invertTree(self, root):
         """
+        Recursive solution
         :type root: TreeNode
         :rtype: TreeNode
         """
@@ -44,4 +45,36 @@ class Solution:
         root.left = right
         root.right = left;
         
-        return root;
+        return root
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def invertTree(self, root):
+        """
+        Iterative solution
+        :type root: TreeNode
+        :rtype: TreeNode
+        """
+        if not root:
+            return root
+        
+        l = [root]
+        while l:
+            node = l.pop()
+
+            left = node.left
+            node.left = node.right
+            node.right = left
+            
+            if node.left is not None:
+                l.append(node.left)
+            if node.right is not None:
+                l.append(node.right)
+       
+        return root
