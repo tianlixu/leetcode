@@ -26,13 +26,12 @@ class Solution:
         ret = []
         
         dic = {}
-        for i in range(len(nums)):
-            key = target - nums[i]
+        for i,num in enumorate(nums):
             
             if key in dic:
                 ret = [dic[key], i]
                 break
             else:
-                dic[nums[i]] = i
+                dic[num] = i
         
         return ret
