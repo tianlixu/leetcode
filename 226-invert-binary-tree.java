@@ -54,21 +54,6 @@ public class Solution {
     }
 
 
-    /**
-     * Iterative approach
-     *
-     * Alternatively, we can solve the problem iteratively, in a manner similar to
-     * breadth-first search.
-     *
-     * Algorithm
-     * The idea is that we need to swap the left and right child of all nodes in
-     * the tree. So we create a queue to store nodes whose left and right child have
-     * not been swapped yet. Initially, only the root is in the queue. As long as
-     * the queue is not empty, remove the next node from the queue, swap its children,
-     * and add the children to the queue. Null nodes are not added to the queue.
-     * Eventually, the queue will be empty and all the children swapped, and we return
-     * the original root.
-     */
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
             return null;
@@ -94,5 +79,34 @@ public class Solution {
         }
 
         return root;
+    }
+}
+
+
+class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) return false;
+        
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        root.val = sum - root.val;
+        q.add(root);
+        
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            if (node.val == 0 && node.left == null && node.right == null)
+                return true;
+            
+            if (node.left != null) {
+                node.left.val = node.val - node.left.val;
+                q.add(node.left);
+            }
+            
+            if (node.right != null) {
+                node.right.val = node.val - node.right.val;
+                q.add(node.right);
+            }
+        }
+        
+        return false;
     }
 }
