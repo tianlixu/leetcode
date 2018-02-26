@@ -33,13 +33,13 @@ class Solution {
 
 class Solution {
     public int climbStairs(int n) {
-        if (n <=2) {
+        if (n <= 2) {
             return n;
         }
         
         int dp1 = 1; 
         int dp2 = 2;
-        int dp=0;
+        int dp = 0;
         int i = 3;
         while (i <= n) {
             dp = 0;
