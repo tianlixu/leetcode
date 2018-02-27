@@ -81,32 +81,3 @@ public class Solution {
         return root;
     }
 }
-
-
-class Solution {
-    public boolean hasPathSum(TreeNode root, int sum) {
-        if (root == null) return false;
-        
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        root.val = sum - root.val;
-        q.add(root);
-        
-        while (!q.isEmpty()) {
-            TreeNode node = q.poll();
-            if (node.val == 0 && node.left == null && node.right == null)
-                return true;
-            
-            if (node.left != null) {
-                node.left.val = node.val - node.left.val;
-                q.add(node.left);
-            }
-            
-            if (node.right != null) {
-                node.right.val = node.val - node.right.val;
-                q.add(node.right);
-            }
-        }
-        
-        return false;
-    }
-}
