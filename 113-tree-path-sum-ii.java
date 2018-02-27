@@ -58,3 +58,37 @@ class Solution {
         return leftPaths;
     }
 }
+
+/**
+ * 
+ *
+ */
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> paths = new LinkedList<List<Integer>>();  
+        List<Integer> path = new LinkedList<Integer>();
+        dfs(root, sum, paths, path);
+        return paths;    
+    }
+    
+    public void dfs(TreeNode root, int sum, List<List<Integer>> paths, List<Integer> path) {
+        if (root == null)
+            return;
+        
+        path.add(root.val);
+        if (root.left == null && root.right == null) {
+            if (sum == root.val) {
+                // found a path, then add it             
+                paths.add(path);
+            }
+        } else {
+            List<Integer> copyPath = new LinkedList<Integer>();
+            copyPath.addAll(path);
+   
+            // find path from left
+            dfs(root.left, sum - root.val, paths, path);
+            // find path from right
+            dfs(root.right, sum - root.val, paths, copyPath);                
+        }
+    }
+}
