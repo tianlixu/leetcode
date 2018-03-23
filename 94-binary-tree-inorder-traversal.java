@@ -45,3 +45,45 @@ class Solution {
         inorder(root.right, values);
     }
 }
+
+
+/**
+ * Iterative solution, which can be applied to in-order, pre-order and post-order traversal
+ */
+import java.util.AbstractMap;
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new LinkedList<Integer>();
+
+        if (root != null) {
+            // Map.Entry is something like a tuple/pair in python
+            Stack<Map.Entry<TreeNode, Boolean>> stack = new Stack();
+            TreeNode node = root;
+            boolean visited = false;
+            Map.Entry<TreeNode, Boolean> entry = new AbstractMap.SimpleEntry(node, visited);
+            stack.push(entry);
+
+            while(!stack.empty()) {
+                entry = stack.pop();
+                node = entry.getKey();
+                visited = entry.getValue();
+
+                if (visited) {
+                    list.add(node.val);
+                } else {
+                    // push in R->V->L, then visit in L-V-R
+                    if (node.right != null) {
+                        stack.push(new AbstractMap.SimpleEntry(node.right, false));
+                    }
+                    stack.push(new AbstractMap.SimpleEntry(node, true));
+                    if (node.left != null) {
+                        stack.push(new AbstractMap.SimpleEntry(node.left, false));
+                    }
+                }
+            }
+        }
+
+        return list;
+    }
+}
