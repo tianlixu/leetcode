@@ -27,6 +27,8 @@ Hint: in-order traversal a bst would create a sorted array.
  * }
  */
 
+
+// Iterative solution
 import java.util.AbstractMap;
 class Solution {
     public int kthSmallest(TreeNode root, int k) {        
@@ -58,5 +60,51 @@ class Solution {
         }
 
         return node.val;
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+
+// Recursive solution
+import java.util.concurrent.atomic.AtomicInteger;
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        // in-order traversal
+        return inorder(root, new AtomicInteger(k));
+    }
+
+    private int inorder(TreeNode root, AtomicInteger K) {
+        //L
+        if (root.left != null) {
+            int ret = inorder(root.left, K);
+            if (K.intValue() == 0) {
+                return ret;
+            }
+        }
+
+        // V
+        K.addAndGet(-1);
+        if (K.intValue() == 0) {
+            return root.val;
+        }
+
+        if (root.right != null) {
+            int ret = inorder(root.right, K);
+            if (K.intValue() == 0) {
+                return ret;
+            }
+        }
+
+        // !!! should never reach here
+        return 0;
     }
 }
