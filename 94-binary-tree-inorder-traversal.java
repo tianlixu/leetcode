@@ -87,3 +87,27 @@ class Solution {
         return list;
     }
 }
+
+// Yet another solution for in-order
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new LinkedList<Integer>();
+        if (root != null) {
+            Stack<TreeNode> stack = new Stack();
+            TreeNode current = root;
+
+            while (current != null || !stack.empty()) {
+                if (current!= null) {
+                    stack.push(current);   // push current root to stack
+                    current = current.left; // move on to its left child
+                } else {
+                    current = stack.pop(); // pop root
+                    list.add(current.val); // visit root
+                    current = current.right; // move on to its right child
+                }
+            }
+        }
+
+        return list;
+    }
+}
