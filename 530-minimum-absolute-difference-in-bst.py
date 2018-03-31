@@ -62,5 +62,52 @@ class Solution:
         
         return ret
 
-# in-order tranverse with 94, the minimu is the one in the differences between any two adjacent elements
+# in-order tranverse with 94, the minimum is the one in the differences between any two adjacent elements
+class Solution:
+    def getMinimumDifference(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        inorder_values = self.inorderTraversal(root)
+        
+        return self.getMinimumDifferenceBetweenAdjacentElements(inorder_values)
+    
+    def getMinimumDifferenceBetweenAdjacentElements(selt, alist):
+        """
+        :type alist: List[int]
+        :rtype: int
+        """
+        diffs = [abs(alist[i] - alist[i-1]) for i in range(1, len(alist))]
+        return min(diffs)
+        
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        values = []
 
+        if not root:
+            return values
+        
+        stack = [] # stack for tuple (node, bool), the bool means if this node has been visited
+        node = root
+        visited = False
+        stack.append((node, visited))        
+            
+        while stack:
+            node, visited = stack.pop() # visit top
+            
+            if visited:
+                values.append(node.val)
+            else:
+                # R->V->L to stack, LVR to visit
+                # push R
+                if node.right is not None:
+                    stack.append((node.right, False))
+                stack.append((node, True))
+                if node.left is not None:
+                    stack.append((node.left, False))
+        
+        return values
