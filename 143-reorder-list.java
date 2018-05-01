@@ -15,8 +15,78 @@
  */
 
 
+/**
+ * runtime: 4ms, beat 96.2%
+ * A very good solution for runtime
+ */
+class Solution {
+    public void reorderList(ListNode head) {       
+        if (head == null || head.next == null || head.next.next == null) {
+            return;
+        }
+        
+        // break list into two
+        ListNode head2 = breakList(head);
+                
+        // revert the 2nd list
+        head2 = revertList(head2);
+        
+        // merge the two lists
+        head = mergeLists(head, head2);
+    }
+    
+    public ListNode breakList(ListNode head) {
+        ListNode one = head;
+        ListNode two = head;
+        ListNode pre = null;
+        
+        while (two != null && two.next != null) {
+            pre = one;
+            one = one.next;
+            two = two.next.next;
+        }        
+        pre.next = null;
+        
+        return one;
+    }
+
+    // l0 -> l1 -> ... -> ln ==> ln -> ln-1 -> ... -> l1 -> l0
+    public ListNode revertList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        ListNode next = null;
+        
+        while(head != null) {
+            next = head.next;
+            head.next = dummy.next;
+            dummy.next = head;
+            head = next;
+        }
+        
+        return dummy.next;
+    }
+    
+    public ListNode mergeLists(ListNode h1, ListNode h2) {
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        
+        while (h1 != null && h2 != null) {
+            tail.next = h1;
+            h1 = h1.next;
+            tail = tail.next;
+            
+            tail.next = h2;
+            h2 = h2.next;
+            tail = tail.next;
+        }
+        
+        tail.next = (h1 == null) ? h2 : h1;
+        
+        return dummy.next;
+    }
+}
+
 /*
- * The recursive solution is quite straightforward
+ * The recursive solution is quite straightforward, but runtime is very long: 893ms!!!
  */
 class Solution {
     public void reorderList(ListNode head) {       
