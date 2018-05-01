@@ -18,6 +18,7 @@
 /**
  * runtime: 4ms, beat 96.2%
  * A very good solution for runtime
+ * Time O(n), Space O(1)
  */
 class Solution {
     public void reorderList(ListNode head) {       
