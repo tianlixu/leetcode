@@ -28,6 +28,7 @@ class Solution:
         :type head: ListNode
         :rtype: void Do not return anything, modify head in-place instead.
         """
+        # reorder if we have no less than 3 nodes
         if head and head.next and head.next.next:
             # break list into two lists from the middle
             head2 = self.break_list(head)
@@ -35,38 +36,41 @@ class Solution:
             head2 = self.revert_list(head2)
             # merge two lists
             head = self.merge_list(head, head2)
-    
-    
+
     def break_list(self, head):
-        one = head # step one node
-        two = head # step two nodes
-        tail = None # tail of the 1st list
-        
+        """
+        break head into to list from the middle node
+        :type head: ListNode, the head of the original list
+        :rtype: ListNode, the head of the 2nd list
+        """
+        one = head  # step one node
+        two = head  # step two nodes
+        tail = None  # tail of the 1st list
+
         while two and two.next:
             tail, one, two = one, one.next, two.next.next
         tail.next = None
-        
+
         return one
-    
-    
+
     def revert_list(self, head):
         dummy = ListNode(0)
         while head:
             dummy.next, head.next, head = head, dummy.next, head.next
-            
+
         return dummy.next
-    
-    
+
     def merge_list(self, head1, head2):
         dummy = ListNode(0)
         tail = dummy
-        
+
         while head1 and head2:
-            tail.next, head1 = head1, head1.next, 
+            # link node from head1
+            tail.next, head1 = head1, head1.next
             tail = tail.next
+            # link node from head2
             tail.next, head2 = head2, head2.next
             tail = tail.next
         tail.next = head1 or head2
-        
+
         return dummy.next
-    
