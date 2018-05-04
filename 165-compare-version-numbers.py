@@ -30,6 +30,7 @@ class Solution:
         :type version2: str
         :rtype: int
         """
+	# v1 = [int(i) for i in version1.split('.')]
         v1 = list(map(int, version1.split('.')))
         v2 = list(map(int, version2.split('.')))
         
