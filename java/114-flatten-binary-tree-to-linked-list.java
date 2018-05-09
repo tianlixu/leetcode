@@ -1,0 +1,75 @@
+/**
+  Source : https://leetcode.com/problems/flatten-binary-tree-to-linked-list
+  Author : Alex Xu
+  Date   : May 09, 2018
+  Problem: Given a binary tree, flatten it to a linked list in-place.
+  
+  For example, given the following tree:
+
+    1
+   / \
+  2   5
+ / \   \
+3   4   6
+The flattened tree should look like:
+
+1
+ \
+  2
+   \
+    3
+     \
+      4
+       \
+        5
+         \
+          6
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        flatten_helper(root);
+    }
+
+    /**
+     * return the last node
+     */
+    private TreeNode flatten_helper(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.left == null && root.right == null) {
+            return root;
+        }
+
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        TreeNode tail= null;
+
+        if (left != null) {
+            tail = flatten_helper(left);
+            root.right = left;
+            root.left = null;
+        }
+
+        if (tail != null) {
+            tail.right = right;
+            tail.left = null;
+        }
+
+        if (right != null) {
+            tail = flatten_helper(right);
+        }
+
+        return tail;
+    }
+}
