@@ -105,8 +105,10 @@ class Solution {
 
 
 /**
- * cut the current.right and link it to current.left.right_most
  * Non-recursive, O(1) space
+ * 1. cut the current.right and link it to current.left.right_most
+ * 2. move current.left to current.right
+ * 3. set current.right as null
  */
 class Solution {
     public void flatten(TreeNode root) {
