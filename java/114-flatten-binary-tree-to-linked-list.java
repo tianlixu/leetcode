@@ -102,3 +102,26 @@ class Solution {
         }
     }
 }
+
+
+/**
+ * cut the current.right and link it to current.left.right_most
+ * Non-recursive, O(1) space
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        TreeNode current = root;
+        while (current != null) {
+            if (current.left != null) {
+                TreeNode right_most = current.left;
+                while (right_most.right != null) {
+                    right_most = right_most.right;
+                }
+                right_most.right = current.right;
+                current.right = current.left;
+                current.left = null;
+            } 
+            current = current.right; 
+        }    
+    }
+}
