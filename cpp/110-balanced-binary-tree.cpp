@@ -18,6 +18,8 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+// beats 98.28%
 class Solution {
 public:
     bool isBalanced(TreeNode *root) {
@@ -30,11 +32,16 @@ public:
             return 0;
             
         int leftDepth = depth(root->left);
-        int rightDepth = depth(root->right);
+        if (leftDepth < 0)
+            return -1;
         
-        if (leftDepth < 0 || rightDepth < 0 || abs(leftDepth - rightDepth) > 1)
+        int rightDepth = depth(root->right);
+        if (rightDepth < 0)
+            return -1;
+        
+        if (abs(leftDepth - rightDepth) > 1)
             return -1; // trim
             
-        return max(leftDepth, rightDepth) + 1;
+        return max(leftDepth, rightDepth) + 1; // +1 for root
     }
 };
