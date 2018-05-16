@@ -18,7 +18,7 @@ You can assume that you can always reach the last index.
 """
 
 """
-96 ms, beats 18%. not good.
+68 ms, beats 46%. not good
 """
 class Solution:
     def jump(self, nums):
@@ -46,6 +46,7 @@ class Solution:
         
         for index, value in enumerate(nums[start : end + 1]):
             next_end = max(next_end, start + value + index)
+            if next_end >= len(nums) - 1:
+                break; # found solution, no need to continue
         
-        print("next:", next_start, next_end)
         return (next_start, next_end)
