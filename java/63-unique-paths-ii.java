@@ -28,15 +28,17 @@ There are two ways to reach the bottom-right corner:
 2. Down -> Down -> Right -> Right
 */
 
-// dp solution that beats 100%
+// dp solution that beats 100% ?!
     class Solution {
         public int uniquePathsWithObstacles(int[][] obstacleGrid) {
             int m= obstacleGrid.length;
             int n = m > 0 ? obstacleGrid[0].length : 0;
-        
+
+            // init dp[0][0], actually, we can just return if grid[0][0] or gird[m-1][n-1] is 1(obstacle)
             int[][] dp = new int[m][n];
             dp[0][0] = obstacleGrid[0][0] == 0 ? 1 : 0;
        
+            // init the 1st column
             for (int i=1; i<m; i++) {
                 if (dp[i-1][0] == 1 && obstacleGrid[i][0] == 0) {
                     dp[i][0] = 1;
@@ -44,7 +46,8 @@ There are two ways to reach the bottom-right corner:
                     dp[i][0] = 0;
                 }
             }
-       
+
+            // init the 1st row
             for (int j=1; j<n; j++) {
                 if (dp[0][j-1] == 1 && obstacleGrid[0][j] == 0) {
                     dp[0][j] = 1;
@@ -52,7 +55,8 @@ There are two ways to reach the bottom-right corner:
                     dp[0][j] = 0;
                 }
             }
-       
+
+            // calculate others
             for (int i=1; i<m; i++) {
                 for (int j=1; j<n; j++) {
                     if (obstacleGrid[i][j] == 1) {
@@ -62,7 +66,8 @@ There are two ways to reach the bottom-right corner:
                     }
                 }
             }
-        
+
+            // dp[m-1][n-1] is the answer
             return dp[m-1][n-1];
         }
 
