@@ -18,7 +18,7 @@ public class Solution {
         int ret = 0;
 
         // HashMap saves a character(key) and its index
-        HashMap<Character, Integer> m = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> m = new HashMap<>();
 
         while (j < s.length()) {
             if (m.containsKey(s.charAt(j))) {

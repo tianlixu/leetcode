@@ -22,7 +22,7 @@ class Solution {
     public int[] twoSum(int[] nums, int target) {
         int[] ret = new int[2];
         
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(); // key: addend, value: index
+        HashMap<Integer, Integer> map = new HashMap<>(); // key: addend, value: index
         for (int i=0; i<nums.length; i++) {
             int augend = nums[i];
             Integer index = map.get(augend);

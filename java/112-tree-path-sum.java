@@ -47,7 +47,7 @@ class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) return false;
         
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Queue<TreeNode> q = new LinkedList<>();
         root.val = sum - root.val;
         q.add(root);
         

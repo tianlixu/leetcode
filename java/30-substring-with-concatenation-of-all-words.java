@@ -16,14 +16,14 @@
 
 class Solution {
     public List<Integer> findSubstring(String s, String[] words) {
-        List<Integer> ret = new ArrayList<Integer>();
+        List<Integer> ret = new ArrayList<>();
 
         if (s == null || s.isEmpty() || words == null || words.length == 0) {
             return ret;
         }
 
         int size = 0; // fixed window size for each try
-        HashMap<String, Integer> m = new HashMap<String, Integer>();
+        HashMap<String, Integer> m = new HashMap<>();
         for (String word : words) {
             if (word == null || word.isEmpty()) {
                 continue;
@@ -47,7 +47,7 @@ class Solution {
 
         int length = words[0].length(); // word length
         while (s.length() - left >= size) {
-            HashMap<String, Integer> m2 = new HashMap<String, Integer>(m);
+            HashMap<String, Integer> m2 = new HashMap<>(m);
 
             for (int i=0; i<words.length; i++) {
                 String aWord = s.substring(left + i*length, left + (i+1)*length);

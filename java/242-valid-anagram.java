@@ -48,7 +48,7 @@ public class Solution {
             return false;
         }
 
-        HashMap<Character, Integer> m = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> m = new HashMap<>();
 
         for (int i=0; i<s.length(); i++) {
             char sChar = s.charAt(i);

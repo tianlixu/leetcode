@@ -33,7 +33,7 @@ class Solution {
             73, 79, 83, 89, 97, 101
         };
         
-        List<List<String>> ret = new ArrayList<List<String>>();
+        List<List<String>> ret = new ArrayList<>();
         HashMap<Integer, List<String>> m = new HashMap<>();
         
         for (String s : strs) {
@@ -61,7 +61,7 @@ class Solution {
 // sorted strings as the key
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> ret = new ArrayList<List<String>>();
+        List<List<String>> ret = new ArrayList<>();
         HashMap<String, List<String>> m = new HashMap<>();
 
         for (String s : strs) {
@@ -70,7 +70,7 @@ class Solution {
             String k = String.valueOf(a);
 
             if (!m.containsKey(k)) {
-                List<String> l = new ArrayList<String>();
+                List<String> l = new ArrayList<>();
                 l.add(s);
                 m.put(k, l);
                 ret.add(l);

@@ -96,7 +96,7 @@ public class Solution {
         }
 
         // hash maps, Key: character, Value: counter of its appearance
-        HashMap<Character, Integer> m = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> m = new HashMap<>();
         for (char c : p.toCharArray()) {
             if (m.containsKey(c)) {
                 m.put(c, m.get(c) + 1);

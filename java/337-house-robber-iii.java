@@ -79,11 +79,11 @@ class Solution {
  */
 class Solution {
     public int rob(TreeNode root) {
-        HashMap<TreeNode, Integer> m = new HashMap<TreeNode, Integer>();
+        HashMap<TreeNode, Integer> m = new HashMap<>();
         return rob(root, m);
     }
     
-    public int rob(TreeNode root, HashMap<TreeNode, Integer> m) {
+    public int rob(TreeNode root, HashMap<> m) {
         if (root == null) {              
             return 0;
         } 

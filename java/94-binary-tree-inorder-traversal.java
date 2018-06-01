@@ -29,7 +29,7 @@
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
+        List<Integer> list = new LinkedList<>();
         inorder(root, list);
         return list;
     }
@@ -54,7 +54,7 @@ import java.util.AbstractMap;
 
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
+        List<Integer> list = new LinkedList<>();
 
         if (root != null) {
             // Map.Entry is something like a tuple/pair in python
@@ -91,7 +91,7 @@ class Solution {
 // Yet another solution for in-order
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
+        List<Integer> list = new LinkedList<>();
         if (root != null) {
             Stack<TreeNode> stack = new Stack();
             TreeNode current = root;
