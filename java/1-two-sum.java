@@ -18,6 +18,27 @@ return [0, 1].
 
 import java.util.HashMap;
 
+// beats 93%
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] ret = new int[2];
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i=0; i<nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                ret[0] = map.get(nums[i]);
+                ret[1] = i;
+                break;
+            } else {
+                map.put(target - nums[i], i);
+            }
+        }
+        
+        return ret;
+    }
+}
+
+// beats 75%
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         int[] ret = new int[2];
@@ -37,3 +58,4 @@ class Solution {
         return ret;
     }
 }
+
