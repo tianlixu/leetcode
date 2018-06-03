@@ -33,15 +33,15 @@
 class Solution {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {      
         if (root == null) {
-            List<List<Integer>> paths = new LinkedList<List<Integer>>();    
+            List<List<Integer>> paths = new LinkedList<>();    
             return paths;
         }
         
         if (root.left == null && root.right == null && root.val == sum) {
             // found a path, then create a path and return it
-            List<Integer> path = new LinkedList<Integer>();
+            List<Integer> path = new LinkedList<>();
             path.add(root.val);
-            List<List<Integer>> paths = new LinkedList<List<Integer>>();            
+            List<List<Integer>> paths = new LinkedList<>();            
             paths.add(path);
             
             return paths;
@@ -65,8 +65,8 @@ class Solution {
  */
 class Solution {
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> paths = new LinkedList<List<Integer>>();  
-        List<Integer> path = new LinkedList<Integer>();
+        List<List<Integer>> paths = new LinkedList<>();  
+        List<Integer> path = new LinkedList<>();
         dfs(root, sum, paths, path);
         return paths;    
     }
@@ -82,7 +82,7 @@ class Solution {
                 paths.add(path);
             }
         } else {
-            List<Integer> copyPath = new LinkedList<Integer>();
+            List<Integer> copyPath = new LinkedList<>();
             copyPath.addAll(path);
    
             // find path from left

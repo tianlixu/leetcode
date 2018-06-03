@@ -60,7 +60,7 @@ public class Solution {
         }
 
         // use a queue/stack/whatever to save the nodes will be inverted
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
 
         while(!q.isEmpty()) {

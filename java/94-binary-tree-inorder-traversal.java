@@ -91,7 +91,7 @@ class Solution {
 // Yet another solution for in-order
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new LinkedList<Integer>();
+        List<Integer> list = new LinkedList<>();
         if (root != null) {
             Stack<TreeNode> stack = new Stack();
             TreeNode current = root;

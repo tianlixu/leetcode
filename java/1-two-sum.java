@@ -26,11 +26,11 @@ class Solution {
         for (int i=0; i<nums.length; i++) {
             Integer index = map.get(nums[i]);
             if (index == null) {
-                map.put(target - nums[i], i); // key is the 2nd addend, value is its index
+                map.put(target - nums[i], i);
             } else {
-                ret[0] = index; // index for the 1st addend
-                ret[1] = i;     // index for the 2nd addend
-                break;          // found it, break then
+                ret[0] = index;
+                ret[1] = i;
+                break;
             }
         }
         

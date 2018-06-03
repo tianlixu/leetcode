@@ -33,7 +33,7 @@ class Solution {
         String ret = "";
         int len = Integer.MAX_VALUE;
 
-        HashMap<Character, Integer> m = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> m = new HashMap<>();
         for (char c : t.toCharArray()) {
             // count the number of appearance of each char
             if (m.containsKey(c)) {
