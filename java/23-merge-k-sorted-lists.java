@@ -15,7 +15,7 @@
 */
 
 /*
-Solution 1: 15ms, beats 84.38%
+Solution 1: Runtime: 15ms, beats 84.38%
 1. Traverse all the linked lists and collect the values of the nodes into an array.
 2. Sort and iterate over this array to get the proper value of nodes. (quick sort, NlogN)
 3. Create a new sorted linked list and extend it with the new nodes.
@@ -144,7 +144,7 @@ Time complexity : O(Nlog k) where k is the number of linked lists.
       But finding the node with the smallest value just costs O(1) time.
     - There are N nodes in the final linked list.
 Space complexity :
-    - O(n) Creating a new linked list costs O(n) space.
+    - O(N) Creating a new linked list costs O(N) space.
     - O(k) The code above present applies in-place method which cost O(1) space. And the priority queue (often implemented with heaps) costs O(k) space (it's far less than N in most situations).
 
 
@@ -194,3 +194,99 @@ class Solution {
     }
 }
 
+/*
+ Solution 4: Merge list one bye one, using the implementation from 21-merge-two-sorted-list.java, poor runtime: 202ms
+
+Complexity Analysis
+
+Time complexity : O(kN) where k is the number of linked lists.
+    - We can merge two sorted linked list in O(n) time where n is the total number of nodes in two lists.
+    - Sum up the merge process and we can get: O(\sum_{i=1}^{k-1} (i*(\frac{N}{k}) + \frac{N}{k})) = O(kN)
+Space complexity : O(1)
+
+We can merge two sorted linked list in O(1)O(1) space.
+**/
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists==null||lists.length==0) return null;
+
+        ListNode ret = null;
+        for (ListNode l : lists) {
+            ret = mergeTwoLists(ret, l);
+        }
+        
+        return ret;
+    }
+    
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
+
+            while (l1 != null && l2 != null) {
+                if (l1.val < l2.val) {
+                    tail.next = l1;
+                    l1 = l1.next;
+                } else {
+                    tail.next = l2;
+                    l2 = l2.next;
+                }
+                tail = tail.next;
+            }
+            tail.next = (l1 == null) ? l2: l1;
+
+            return dummy.next;
+        }
+}
+
+
+/*
+ Solution 5: Merge with Device and Conquer, Runtime 13ms, beats 99.43%, good job!
+
+Complexity Analysis
+
+Time complexity : O(Nlog k) where k is the number of linked lists.
+    - We can merge two sorted linked list in O(n) time where n is the total number of nodes in two lists.
+    - Sum up the merge process and we can get: O(\sum_{i=1}^{log_{2}{k}} N)= O(Nlogk)
+Space complexity : O(1)
+
+We can merge two sorted linked lists in O(1) space.
+**/
+public class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0) {
+            return null;
+        }
+        
+        return mergeKLists(lists, 0, lists.length-1);
+    }
+    
+    public ListNode mergeKLists(ListNode[] lists, int left, int right) {
+        if (left == right) {
+            return lists[left];
+        }
+        
+        int middle = (right + left) / 2;
+        ListNode listLeft = mergeKLists(lists, left, middle);
+        ListNode listRight = mergeKLists(lists, middle+1, right);
+        return mergeTwoLists(listLeft, listRight);
+    }
+    
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+            ListNode dummy = new ListNode(0);
+            ListNode tail = dummy;
+
+            while (l1 != null && l2 != null) {
+                if (l1.val < l2.val) {
+                    tail.next = l1;
+                    l1 = l1.next;
+                } else {
+                    tail.next = l2;
+                    l2 = l2.next;
+                }
+                tail = tail.next;
+            }
+            tail.next = (l1 == null) ? l2: l1;
+
+            return dummy.next;
+        }
+}
