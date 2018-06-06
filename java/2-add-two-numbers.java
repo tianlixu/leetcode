@@ -29,27 +29,94 @@
  *                   extra
  *     ||    ||    ||    ||     ||    ||    ||     ||
  *     s1 -> s2 -> s3 -> s4 -> ... -> sn -> ... -> sm
+ * Runtime: 51ms, beats 96.85%
  */
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode headNode = new ListNode(0);
-        ListNode p = headNode;
-        int extra = 0;
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int carry = 0;
         int sum = 0;
 
-        while(l1 != null || l2 != null || extra != 0) {
-            sum = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + extra;
-            extra = sum / 10;
+        while(l1 != null || l2 != null || carry != 0) {
+            sum = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + carry;
+            carry = sum / 10;
 
-            ListNode n = new ListNode(sum%10);
-            p.next =n;
-            p = p.next;
+            ListNode node = new ListNode(sum % 10);
+            tail.next = node;
+            tail = tail.next;
 
             l1 = l1 != null ? l1.next : null;
             l2 = l2 != null ? l2.next : null;
         }
 
-        return headNode.next;
+        return dummy.next;
+    }
+}
 
+
+/*
+Solution 2: Recursive, Runtime 63ms, beats 66.20%
+**/
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        return addTwoNumbers(l1, l2, 0);
+    }
+    
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null && l2 == null && carry == 0) {
+            return null;
+        }
+        
+        int sum = (l1 != null ? l1.val : 0) + (l2 != null ? l2.val : 0) + carry;
+        carry = sum / 10;
+
+        ListNode head = new ListNode(sum % 10);
+        l1 = l1 != null ? l1.next : null;
+        l2 = l2 != null ? l2.next : null;
+        head.next = addTwoNumbers(l1, l2, carry);
+
+        return head;
+    }
+}
+
+/*
+  Variation of Solution 2.
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        return addTwoNumbers(l1, l2, 0);
+    }
+    
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2, int carry) {
+        if (l1 == null) {
+            return addTwoNumbers(l2, carry);
+        } 
+        
+        if (l2 == null) {
+            return addTwoNumbers(l1, carry);
+        }
+
+        
+        int sum =  l1.val + l2.val + carry;
+        ListNode head = new ListNode(sum % 10);
+        head.next = addTwoNumbers(l1.next, l2.next, sum / 10);
+
+        return head;
+    }
+    
+    public ListNode addTwoNumbers(ListNode l, int carry) {
+        if (carry == 0) {
+            return l;
+        }
+        if (l == null) {
+            return new ListNode(carry);
+        }
+        
+        int sum = l.val + carry;
+        ListNode head = new ListNode(sum % 10);
+        head.next = addTwoNumbers(l.next, sum / 10);
+        
+        return head;
     }
 }
