@@ -93,6 +93,20 @@ class Solution {
     }
 }
 
+
+
+/*
+Same solution as above using two pointers.
+
+"=" denotes the amount of water been trapped in position i: delta = maxofmin - a[i] (min = Math.min(a[i], a[j]) = a[i]):
+                                 ||
+    ||= = = = =  =               ||
+    ||= = = ||=  =               ||
+____||=|| = ||= ||_______________||_______
+    ^          a[i]=1          a[j]=4
+    |
+    |maxofmin=3
+ */
 class Solution {                                                                               
     public int trap(int[] height) {                                                            
         int sum = 0;             
@@ -100,7 +114,8 @@ class Solution {
         int min = 0;
         int maxofmin = 0;                                                                      
         int i = 0;                                                                             
-        int j = height.length - 1;                                                             
+        int j = height.length - 1;
+
         while (i < j) {                                                                        
             if (height[i] < height[j]) {
                 min = height[i];                                                           
@@ -115,7 +130,8 @@ class Solution {
             } else {                                                                       
                 maxofmin = min;                                                      
             }  
-        }                                                                                      
-        return sum;                                                                            
-    }                                                                                          
+        }
+
+        return sum;
+    }                                                                                
 } 
