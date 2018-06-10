@@ -2,9 +2,7 @@
   Source : https://leetcode.com/problems/jump-game/
   Author : Alex Xu
   Date   : Jul 19, 2016
-  Problem:
-
-Given an array of non-negative integers, you are initially positioned at the first index of the array.
+  Problem: Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
 Each element in the array represents your maximum jump length at that position.
 
