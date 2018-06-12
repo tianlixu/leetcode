@@ -45,7 +45,8 @@ class Solution {
         // merge the two lists
         head = mergeLists(head, head2);
     }
-    
+
+    // break list into two lists from middle and return the 2nd one
     public ListNode breakList(ListNode head) {
         ListNode one = head;
         ListNode two = head;
@@ -61,7 +62,7 @@ class Solution {
         return one;
     }
 
-    // l0 -> l1 -> ... -> ln ==> ln -> ln-1 -> ... -> l1 -> l0
+    // l0 -> l1 -> ... -> ln ==> ln -> ln-1 -> ... -> l1 -> l0, refer to problem #206
     public ListNode revertList(ListNode head) {
         ListNode dummy = new ListNode(0);
         ListNode next = null;

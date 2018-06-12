@@ -22,7 +22,7 @@ Could you do it in O(n) time and O(1) space?
  break list into two lists using one/two pointers to step forward and find the middle node
  reverse the fist node during the find process
  compare the two lists
- refer to #143
+ refer to problem #143
 */
 
 /**
@@ -44,7 +44,7 @@ class Solution {
         ListNode dummy = new ListNode(0);
         
         while (true) {
-            // move two first because head(one) is modified in the next section
+            // move two first because head(one.next) is modified in the next section
             two = two.next.next;
             
             ListNode oneNext = one.next;
